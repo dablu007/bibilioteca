@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class TestListBooksCommand {
     private ArrayList<Book> books;
     @Test
-    public void checkListBooks(){
+    public void testBooksList(){
 
         Library library = new Library();
         library.addBooks();
