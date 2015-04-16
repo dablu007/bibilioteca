@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
  */
 public class Main {
     public static void main(String args[]){
-        Book.Library library = new Book.Library();
+        Library library = new Library();
         library.addBooks();
         Display display = new Display();
         display.welcomeMessage();
@@ -22,7 +22,7 @@ public class Main {
             System.out.println("Enter Your Choice");
             int choice;
 
-            Book.ListBooksCommand listbooks = new Book.ListBooksCommand(library);
+            ListBooksCommand listbooks = new ListBooksCommand(library);
             GetBookDetail getbookdetail = new GetBookDetail(library);
 
             Menu options = new Menu();
