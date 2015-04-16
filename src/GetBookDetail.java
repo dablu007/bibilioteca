@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class GetBookDetail implements  ICommand{
     private ArrayList<Book> books;
-
     public GetBookDetail(Library app) {
         books = new ArrayList<Book>();
         this.books = app.getBooks();
