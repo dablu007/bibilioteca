@@ -16,11 +16,6 @@ public class GetBookDetail implements ICommand {
         books = new ArrayList<Book>();
         this.books = app.getBooks();
     }
-
-    public GetBookDetail() {
-
-    }
-
     public ArrayList<Book> getBooks() {
         return books;
     }
