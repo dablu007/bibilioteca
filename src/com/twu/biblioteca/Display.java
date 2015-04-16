@@ -14,8 +14,8 @@ public class Display {
         }
         public void printMenu(){
             System.out.println("---------------Avilable Choices------------------");
-            System.out.println("1.com.twu.biblioteca.Book.ListBooksCommand");
-            System.out.println("2.Search com.twu.biblioteca.Book By com.twu.biblioteca.Book Number");
+            System.out.println("1.Book.ListBooks");
+            System.out.println("2.Search Book By Book Number");
             System.out.println("3.Quit");
         }
 }
