@@ -17,7 +17,6 @@ class SampleCommand implements ICommand {
 }
 
 public class MenuTests {
-
     @Test
     public void ShouldCreateMenu()  {
         ICommand sampleCommand = new SampleCommand();
