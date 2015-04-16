@@ -30,6 +30,10 @@ public class ListBooksCommand implements ICommand {
         }
     }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
     public int getTotalbooks() {
         return totalbooks;
     }
