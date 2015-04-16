@@ -10,8 +10,6 @@ public class ListBooksCommand implements ICommand {
         books = new ArrayList<Book>();
         this.books = app.getBooks();
     }
-
-
     @Override
     public void execute() {
         System.out.print("\033[H\033[2J");
