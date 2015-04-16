@@ -8,15 +8,13 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String args[]){
         Library library = new Library();
-        library.welcomeMessage(); //TODO:
-        library.addBooks();
 
+        library.addBooks();
+        Display display = new Display();
+        display.welcomeMessage();
 
         while (true){
-            System.out.println("---------------Avilable Choices------------------");
-            System.out.println("1.ListBooksCommand");
-            System.out.println("2.Search Book By Book Number");
-            System.out.println("3.Quit");
+            display.printMenu();
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter Your Choice");
             int choice;
@@ -29,14 +27,10 @@ public class Main {
             options.addCommand(1, listbooks);
             options.addCommand(2, getbookdetail);
 
-//            options.addOptionforCommandToExecute();
-
-        //    CommandToExecute option = new CommandToExecute();
             try {
                 choice = Integer.parseInt(input.readLine());
                 ICommand command = options.getCommand(choice);
                 command.execute();
-//                option.executeSelectedOption(command);
 
             }
             catch (IOException e) {

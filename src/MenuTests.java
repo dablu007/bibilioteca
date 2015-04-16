@@ -8,14 +8,13 @@ import static org.junit.Assert.assertEquals;
  */
 
 
-class SampleCommand implements ICommand{
+class SampleCommand implements ICommand {
 
     @Override
     public void execute() {
 
     }
 }
-
 
 public class MenuTests {
 
