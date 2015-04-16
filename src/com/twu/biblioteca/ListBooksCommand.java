@@ -30,7 +30,7 @@ public class ListBooksCommand implements ICommand {
         }
     }
 
-    public ArrayList<Book> getBooks() {
+    private ArrayList<Book> getBooks() {
         return books;
     }
 
