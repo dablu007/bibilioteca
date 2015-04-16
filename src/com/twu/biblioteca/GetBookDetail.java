@@ -21,6 +21,10 @@ public class GetBookDetail implements ICommand {
 
     }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
     @Override
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
