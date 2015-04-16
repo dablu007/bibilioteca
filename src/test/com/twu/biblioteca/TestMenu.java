@@ -16,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 
 
 class SampleCommand implements ICommand {
-
     @Override
     public void execute() {
 
@@ -29,8 +28,8 @@ public class TestMenu {
         ICommand sampleCommand = new SampleCommand();
 
         Menu menu = new Menu();
+
         menu.addCommand(1,sampleCommand);
-        menu.addCommand(2,null);
 
         assertEquals(menu.getCommand(1), sampleCommand);
 
