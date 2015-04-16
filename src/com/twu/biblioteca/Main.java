@@ -1,3 +1,7 @@
+package com.twu.biblioteca;
+
+import com.twu.biblioteca.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +11,7 @@ import java.io.InputStreamReader;
  */
 public class Main {
     public static void main(String args[]){
-        Library library = new Library();
+        Book.Library library = new Book.Library();
         library.addBooks();
         Display display = new Display();
         display.welcomeMessage();
@@ -18,7 +22,7 @@ public class Main {
             System.out.println("Enter Your Choice");
             int choice;
 
-            ListBooksCommand listbooks = new ListBooksCommand(library);
+            Book.ListBooksCommand listbooks = new Book.ListBooksCommand(library);
             GetBookDetail getbookdetail = new GetBookDetail(library);
 
             Menu options = new Menu();

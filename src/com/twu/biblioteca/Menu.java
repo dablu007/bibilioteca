@@ -1,5 +1,6 @@
-import java.util.HashMap;
+package com.twu.biblioteca;
 
+import java.util.HashMap;
 /**
  * Created by dabluk on 15/04/15.
  */

@@ -1,4 +1,5 @@
-import org.junit.Before;
+import com.twu.biblioteca.ICommand;
+import com.twu.biblioteca.Menu;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +17,7 @@ class SampleCommand implements ICommand {
     }
 }
 
-public class MenuTests {
+public class TestMenu {
     @Test
     public void ShouldCreateMenu()  {
         ICommand sampleCommand = new SampleCommand();
