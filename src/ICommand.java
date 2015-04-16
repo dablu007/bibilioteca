@@ -3,5 +3,4 @@
  */
 public interface ICommand {
     void execute();
-    void setBooks(BibliotecaApp library);
 }

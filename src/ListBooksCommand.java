@@ -6,13 +6,9 @@ import java.util.ArrayList;
 public class ListBooksCommand implements ICommand {
     private  ArrayList<Book> books;
 
-    public ListBooksCommand(BibliotecaApp app) {
+    public ListBooksCommand(Library app) {
         books = new ArrayList<Book>();
         this.books = app.getBooks();
-    }
-
-    public ListBooksCommand() {
-
     }
 
 
@@ -27,13 +23,4 @@ public class ListBooksCommand implements ICommand {
             System.out.println(books.get(i));
         }
     }
-
-    @Override
-    public void setBooks(BibliotecaApp library) {
-        books = new ArrayList<Book>();
-    //    BibliotecaApp library = (BibliotecaApp)cmd;
-        this.books = library.getBooks();
-    }
-
-
 }

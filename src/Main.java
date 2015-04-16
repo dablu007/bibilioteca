@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
  */
 public class Main {
     public static void main(String args[]){
-        BibliotecaApp library = new BibliotecaApp();
-        library.welcomeMessage();
+        Library library = new Library();
+        library.welcomeMessage(); //TODO:
         library.addBooks();
 
 
@@ -20,20 +20,23 @@ public class Main {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter Your Choice");
             int choice;
-    //        ICommand listbooks = new ListBooksCommand(library);
-    //        ICommand getbookdetail = new GetBookDetail(library);
 
+            ListBooksCommand listbooks = new ListBooksCommand(library);
+            GetBookDetail getbookdetail = new GetBookDetail(library);
 
+            Menu options = new Menu();
 
-            OptionsAvilableForCommandToExecute optionsAvilableForCommandToExecute = new OptionsAvilableForCommandToExecute();
-            optionsAvilableForCommandToExecute.addOptionforCommandToExecute();
+            options.addCommand(1, listbooks);
+            options.addCommand(2, getbookdetail);
 
-            CommandToExecute option = new CommandToExecute();
+//            options.addOptionforCommandToExecute();
+
+        //    CommandToExecute option = new CommandToExecute();
             try {
                 choice = Integer.parseInt(input.readLine());
-                ICommand command = optionsAvilableForCommandToExecute.getValueofOptionforCommandToExecute(choice);
-                command.setBooks(library);
-                option.executeSelectedOption(command);
+                ICommand command = options.getCommand(choice);
+                command.execute();
+//                option.executeSelectedOption(command);
 
             }
             catch (IOException e) {
