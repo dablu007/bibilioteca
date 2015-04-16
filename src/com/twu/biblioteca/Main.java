@@ -12,8 +12,9 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String args[]){
         Library library = new Library();
-        library.addBooks();
-        Display display = new Display();
+        Book book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
+        library.addBooks(book);
+        Display display = new Display(); //TODO:
         display.welcomeMessage();
 
         while (true){
@@ -24,11 +25,13 @@ public class Main {
 
             ListBooksCommand listbooks = new ListBooksCommand(library);
             GetBookDetail getbookdetail = new GetBookDetail(library);
+            Exit exit = new Exit();
 
             Menu options = new Menu();
 
             options.addCommand(1, listbooks);
             options.addCommand(2, getbookdetail);
+            options.addCommand(3,  exit);
 
             try {
                 choice = Integer.parseInt(input.readLine());
@@ -39,6 +42,7 @@ public class Main {
             catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
 
     }
