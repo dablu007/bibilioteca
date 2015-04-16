@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by dabluk on 16/04/15.
  */
-public class TestLibrary {
+public class LibraryTests {
     private ArrayList<Book> books;
     Library library;
     Book book;

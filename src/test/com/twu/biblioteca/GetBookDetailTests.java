@@ -13,16 +13,17 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by dabluk on 16/04/15.
  */
-public class TestGetBookDetail {
+public class GetBookDetailTests {
     private ArrayList<Book> books;
     @Test
     public void testbookDetail(){
 
         Library library = new Library();
-        library.addBooks();
+        Book book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
+        library.addBooks(book);
         GetBookDetail getBookDetail = new GetBookDetail(library);
         books = getBookDetail.getBooks();
-        Book book = books.get(2);
+        book = books.get(2);
         assertEquals(3, book.getBookNo());
     }
 }
