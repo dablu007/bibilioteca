@@ -5,7 +5,6 @@ import java.util.HashMap;
  */
 public class Menu {
     private HashMap<Integer, ICommand> options;
-
     public Menu(){
         options = new HashMap<Integer, ICommand>();
     }
