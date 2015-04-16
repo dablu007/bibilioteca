@@ -25,9 +25,9 @@ public class GetBookDetail implements ICommand {
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Enter the com.twu.biblioteca.Book Number for getting Details");
+            System.out.println("Book Number for getting Details");
             int bookno = Integer.parseInt(input.readLine());
-            System.out.println("com.twu.biblioteca.Book No.                com.twu.biblioteca.Book Name");
+            System.out.println("Book No.                Book Name");
             for (int i = 0; i < books.size(); i++) {
                 if ( books.get(i).getBookNo() == bookno){
                     System.out.println(books.get(i));
