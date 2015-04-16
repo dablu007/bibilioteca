@@ -14,7 +14,6 @@ public class Book {
     }
 
     public  int getBookNo() {
-
         return bookNo;
     }
 
