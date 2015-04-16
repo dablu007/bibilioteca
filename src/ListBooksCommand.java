@@ -5,12 +5,15 @@ import java.util.ArrayList;
  */
 public class ListBooksCommand implements ICommand {
     private  ArrayList<Book> books;
-
+    private static int totalbooks = 0;
     public ListBooksCommand(Library app) {
         books = new ArrayList<Book>();
         this.books = app.getBooks();
     }
 
+    public int getTotalbooks() {
+        return totalbooks;
+    }
 
     @Override
     public void execute() {
@@ -21,6 +24,7 @@ public class ListBooksCommand implements ICommand {
         System.out.println("_______                 _________");
         for (int i = 0; i < books.size(); i++) {
             System.out.println(books.get(i));
+            totalbooks++;
         }
     }
 }
