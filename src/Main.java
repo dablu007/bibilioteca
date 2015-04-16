@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String args[]){
         Library library = new Library();
-
         library.addBooks();
         Display display = new Display();
         display.welcomeMessage();
