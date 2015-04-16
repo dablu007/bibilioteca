@@ -1,3 +1,5 @@
+import com.twu.biblioteca.Book;
+import com.twu.biblioteca.Library;
 import org.junit.Test;
 
 import java.util.ArrayList;

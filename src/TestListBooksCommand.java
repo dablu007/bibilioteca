@@ -1,3 +1,5 @@
+import com.twu.biblioteca.Library;
+import com.twu.biblioteca.ListBooksCommand;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -5,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by dabluk on 16/04/15.
  */
-public class ListBooksCommandTest {
+public class TestListBooksCommand {
     @Test
     public void checkListBooks(){
         Library library = new Library();
