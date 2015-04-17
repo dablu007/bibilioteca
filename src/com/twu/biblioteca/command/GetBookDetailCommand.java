@@ -15,9 +15,9 @@ import java.util.*;
  */
 public class GetBookDetailCommand implements ICommand {
     private ArrayList<Book> books;
-    public GetBookDetailCommand(Library app) {
+    public GetBookDetailCommand(Library library) {
         books = new ArrayList<Book>();
-        this.books = app.getBooks();
+        this.books = library.getBooks();
     }
     
     @Override
