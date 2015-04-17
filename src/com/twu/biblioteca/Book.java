@@ -10,16 +10,26 @@ public class Book {
     private String bookName;
     private String bookAuthor;
     private String bookPublication;
+    private boolean availability;
 
     public Book(int bookNo, String bookName, String bookAuthor, String bookPublication){
         this.bookName = bookName;
         this.bookNo = bookNo;
         this.bookAuthor = bookAuthor;
         this.bookPublication = bookPublication;
+        this.availability = true;
     }
 
     public  int getBookNo() {
         return bookNo;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    public boolean isAvailability() {
+        return availability;
     }
 
     @Override
