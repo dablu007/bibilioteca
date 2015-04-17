@@ -3,9 +3,8 @@ package com.twu.biblioteca;
 /**
  * Created by dabluk on 16/04/15.
  */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.twu.biblioteca.exception.BookNotFoundException;
+
 import java.util.ArrayList;
 
 /**
@@ -34,7 +33,7 @@ public class Library {
     }
 
 
-    public Book getBook(int bookNumber) throws BookNotFoundException    {
+    public Book getBook(int bookNumber) throws BookNotFoundException {
         for (int i = 0; i<books.size(); i++){
             if(books.get(i).getBookNo() == bookNumber){
                 return books.get(i);
