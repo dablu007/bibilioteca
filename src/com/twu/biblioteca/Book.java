@@ -17,6 +17,10 @@ public class Book {
         this.bookPublication = bookPublication;
     }
 
+    public Book() {
+
+    }
+
     public  int getBookNo() {
         return bookNo;
     }
