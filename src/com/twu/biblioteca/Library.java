@@ -20,16 +20,13 @@ public class Library {
     }
 
     public ArrayList<Book> getBooks() {
+
         return books;
     }
 
 
     public void addBooks(Book book){
             books.add(book);
-//        books.add(new Book(1, "JAVA", "Herbert Schildt", "TMH"));
-//        books.add(new Book(2, "J2EE", "Herbert Schildt", "SUN"));
-//        books.add(new Book(3, "C++", "James Stourstrup", "TMH"));
-//        books.add(new Book(4, "ORACLE", "Harish Gaur", "Oracle"));
     }
 
 
@@ -41,24 +38,16 @@ public class Library {
         }
         throw new BookNotFoundException("Book with id "+ bookNumber + " not found");
     }
-//
-//    public Book getBook(int bookNumber) throws BookNotFoundException {
-//        boolean flag = false;
-//        int i;
-//        for (i = 0; i < books.size(); i++) {
-//            if ( books.get(i).getBookNo() == bookNumber){
-//                flag = true;
-//                break;
-//
-//            }
-//        }
-//        if (flag == true){
-//            return books.get(i);
-//
-//        }
-//        else{
-//            throw new BookNotFoundException("Book not found");
-//        }
-//    }
+    public int BookAvilabilityForCheckout(int bookno){
+        int i;
+        for ( i = 0; i < books.size(); i++){
+            if ( books.get(i).getBookNo() == bookno && books.get(i).isAvailability() == true){
+                books.get(i).setAvailability(false);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
 }
 
