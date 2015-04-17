@@ -10,15 +10,12 @@ public class Book {
     private String bookName;
     private String bookAuthor;
     private String bookPublication;
-    public Book(int bookNo,String bookName,String bookAuthor,String  bookPublication){
+
+    public Book(int bookNo, String bookName, String bookAuthor, String bookPublication){
         this.bookName = bookName;
         this.bookNo = bookNo;
         this.bookAuthor = bookAuthor;
         this.bookPublication = bookPublication;
-    }
-
-    public Book() {
-
     }
 
     public  int getBookNo() {
@@ -27,8 +24,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return bookNo + "                  "+
-                "     " + bookName  ;
+        return String.format("%d%27s", bookNo, bookName);
     }
 
 
