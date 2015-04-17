@@ -1,12 +1,9 @@
 package test.com.twu.biblioteca;
 import com.twu.biblioteca.Book;
-import com.twu.biblioteca.BookNotFoundException;
+import com.twu.biblioteca.exception.BookNotFoundException;
 import com.twu.biblioteca.Library;
-import junit.framework.Assert;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 
