@@ -1,6 +1,8 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.*;
+import com.twu.biblioteca.command.ExitCommand;
+import com.twu.biblioteca.command.GetBookDetailCommand;
+import com.twu.biblioteca.command.ListBooksCommand;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,8 +26,8 @@ public class Main {
             int choice;
 
             ListBooksCommand listbooks = new ListBooksCommand(library);
-            GetBookDetail getbookdetail = new GetBookDetail(library);
-            Exit exit = new Exit();
+            GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
+            ExitCommand exit = new ExitCommand();
 
             Menu options = new Menu();
 
