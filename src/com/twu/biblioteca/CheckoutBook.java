@@ -11,25 +11,29 @@ import java.util.ArrayList;
 public class CheckoutBook implements ICommand{
 
     private ArrayList<Book> books;
+    private Library library = new Library();
     private int checkoutOutput;
     public CheckoutBook(Library library) {
         books = new ArrayList<Book>();
         this.books = library.getBooks();
+
     }
+
 
     @Override
     public void execute() {
-        Library library = new Library();
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            System.out.println("Enter the Book Number for Checkout");
-            int bookno = Integer.parseInt(input.readLine());
-            checkoutOutput = library.BookAvilabilityForCheckout(bookno);
+            for (int i = 0; i < books.size() ; i++) {
+                library.addBooks(books.get(i));
+            }
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        //    System.out.println("Enter the Book Number for Checkout");
+        //    int bookno = Integer.parseInt(input.readLine());
+            checkoutOutput = library.BookAvilabilityForCheckout(1);
+        //    checkoutOutput = library.BookAvilabilityForCheckout(1);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
-    
 
+    public int getCheckoutOutput() {
+        return checkoutOutput;
+    }
 }
