@@ -1,6 +1,8 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.command;
 
 import com.twu.biblioteca.Book;
+import com.twu.biblioteca.ICommand;
+import com.twu.biblioteca.Library;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,16 +12,13 @@ import java.util.*;
 /**
  * Created by dabluk on 15/04/15.
  */
-public class GetBookDetail implements ICommand {
+public class GetBookDetailCommand implements ICommand {
     private ArrayList<Book> books;
-    public GetBookDetail(Library app) {
+    public GetBookDetailCommand(Library app) {
         books = new ArrayList<Book>();
         this.books = app.getBooks();
     }
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
-
+    
     @Override
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));

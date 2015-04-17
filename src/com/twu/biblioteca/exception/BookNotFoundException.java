@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.exception;
 
 public class BookNotFoundException extends Exception{
     public BookNotFoundException(String msg) {

@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.command;
 
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.ICommand;
