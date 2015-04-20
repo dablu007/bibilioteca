@@ -20,19 +20,10 @@ public class ReturnBookCommand implements ICommand {
     public ReturnBookCommand(Library library) {
         this.library  = library;
         issuedHistories = new ArrayList<IssuedHistory>();
-
-
-
-
     }
-
-
 
     @Override
     public void execute()  {
-//        for (int i = 0; i < books.size() ; i++) {
-//            library.addBooks(books.get(i));
-//        }
         ArrayList<IssueDetail> issueDetails = new ArrayList<IssueDetail>();
         issuedHistory = new IssuedHistory();
 
@@ -42,7 +33,7 @@ public class ReturnBookCommand implements ICommand {
         else {
             issuedHistories = library.getIssuedHistories();
             issuedHistory = issuedHistories.get(0);
-            //    issueDetails = issuedHistory.getIssuedStorageDetails();
+
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
             try {
@@ -51,14 +42,11 @@ public class ReturnBookCommand implements ICommand {
                 System.out.println("Enter the Customer Name");
                 String name = input.readLine();
                 String output = issuedHistory.getCustomerName(bookno, issuedHistory.getIssuedStorageDetails());
-                System.out.println();
-                //    System.out.println(name + " " + output);
                 if (name.equals(output)) {
-                    System.out.println("Thankyou for Returning the Book");
+                    System.out.println("Thank you for Returning the Book");
                     Book book = library.getBook(bookno);
                     book.setAvailability(true);
-                    //TODO for making the book avilable if the book is successfully returned by the customer
-                    // and making the avilable option true by using set avilability
+
                 } else {
                     System.out.println("This is Not a Valid Book To Return");
                 }

@@ -42,15 +42,12 @@ public class CheckoutBookCommand implements ICommand {
 
             if(checkoutOutput != null) {
                 System.out.println("Thank you! Enjoy the book");
-
             }
             else
                 System.out.println("That Book is Not Avilable");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //    checkoutOutput = library.BookAvilabilityForCheckout(1);
 
     }
 

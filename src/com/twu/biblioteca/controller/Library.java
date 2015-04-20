@@ -20,7 +20,6 @@ public class Library {
     public Library(){
         issuedHistories = new ArrayList<IssuedHistory>();
         issuedHistory = new IssuedHistory();
-        //returnBookCommand = new ReturnBookCommand();
         books = new ArrayList<Book>();
     }
 
@@ -60,7 +59,6 @@ public class Library {
                     IssueDetail issueDetail = new IssueDetail(name,book);
                     issuedHistory.addIssueDetail(issueDetail);
                     issuedHistories.add(issuedHistory);
-            //        returnBookCommand.add(issuedHistory);
                     return book;
                 }
 

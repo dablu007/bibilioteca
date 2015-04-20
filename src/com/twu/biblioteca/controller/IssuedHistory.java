@@ -15,11 +15,9 @@ public class IssuedHistory {
 
 
     public void addIssueDetail(IssueDetail issueDetail) {
-
         issueDetails.add(issueDetail);
     }
     public ArrayList<IssueDetail> getIssuedStorageDetails() {
-
         return issueDetails;
     }
 
@@ -27,19 +25,11 @@ public class IssuedHistory {
         for(IssueDetail issueDetail:issuedetails){
             System.out.println(issueDetail.getBook());
             if (issueDetail.getBook().getBookNo() == bookno ){
-            //    System.out.println(issueDetail.getBook().getBookNo());
                 return issueDetail.getCustomerName();
-
             }
-            //
+
         }
         return null;
     }
-//    public String getPersonName(int bookno){
-//        for (int i = 0; i < issueDetails.size(); i++) {
-//            if (issueDetails.get(i).getBookno() == bookno)
-//                return issueDetails.get(i).getPersonName();
-//        }
-//        return null;
-//    }
+
 }

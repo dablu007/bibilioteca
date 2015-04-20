@@ -37,7 +37,6 @@ public class CheckoutBookTests {
         CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
         checkoutBook.execute();
         books = library.getBooks();
-    //    System.out.println(books.get(0).isAvailable());
         assertEquals(1, checkoutBook.getCheckoutOutput());
     }
 }
