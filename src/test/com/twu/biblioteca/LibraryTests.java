@@ -2,12 +2,14 @@ package test.com.twu.biblioteca;
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.exception.BookNotFoundException;
 import com.twu.biblioteca.Library;
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -30,7 +32,7 @@ public class LibraryTests {
     public void ShouldBeAbleToGetABookFromTheLibrary(){
         ArrayList<Book> books = library.getBooks();
         book = books.get(0);
-        assertEquals(1,book.getBookNo());
+        assertEquals(1, book.getBookNo());
     }
 
     @Test(expected = BookNotFoundException.class)
@@ -48,5 +50,35 @@ public class LibraryTests {
     public void ShouldAddaBook() throws BookNotFoundException {
         book = library.getBook(1);
         assertEquals(1, book.getBookNo());
+    }
+    @Test
+    public void ShouldCheckoutAIfBookNoCorrect(){
+        book = library.Checkout(1, "Dablu");
+        assertEquals(1, book.getBookNo());
+    }
+    @Test
+    public void ShouldNotThrowExceptionWhenBookNotAvilable(){
+        book = library.Checkout(5,"Dablu");
+        assertNull(book);
+    }
+    @Test
+    public void ShouldAssignABookIfAvilable(){
+        book = library.Checkout(1,"Dablu");
+        assertEquals(1, book.getBookNo());
+    }
+    @Test
+    public void ShouldReturnNullWhenBookNoIsIvalid(){
+        book = library.Checkout(10,"Dablu");
+        assertNull(book);
+    }
+    @Test
+    public void ShouldNotThrowExceptionWhenBookIsIssued() throws BookNotFoundException{
+        book = library.Checkout(1,"Dablu");
+        assertEquals(1,book.getBookNo());
+        book = library.Checkout(1,"Dablu");
+
+        assertNull(book);
+
+
     }
 }

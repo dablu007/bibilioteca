@@ -1,8 +1,7 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.command.ExitCommand;
-import com.twu.biblioteca.command.GetBookDetailCommand;
-import com.twu.biblioteca.command.ListBooksCommand;
+import com.twu.biblioteca.command.*;
+import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +13,14 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String args[]){
         Library library = new Library();
-        Book book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
+        Book book;
+        book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
+        library.addBooks(book);
+        book = new Book(2, "C", "Dennis Richie", "Sun");
+        library.addBooks(book);
+        book = new Book(3, "ORACLE", "Harish Gaur", "TMH");
+        library.addBooks(book);
+        book = new Book(4, "C++", "Herbert Schildt", "TMH");
         library.addBooks(book);
         Display display = new Display(); //TODO:
         display.welcomeMessage();
@@ -27,13 +33,17 @@ public class Main {
 
             ListBooksCommand listbooks = new ListBooksCommand(library);
             GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
+            CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
             ExitCommand exit = new ExitCommand();
+            ReturnBookCommand returnbook = new ReturnBookCommand(library);
 
             Menu options = new Menu();
 
             options.addCommand(1, listbooks);
             options.addCommand(2, getbookdetail);
-            options.addCommand(3,  exit);
+            options.addCommand(3, checkoutBook);
+            options.addCommand(4, returnbook);
+            options.addCommand(5,exit);
 
             try {
                 choice = Integer.parseInt(input.readLine());

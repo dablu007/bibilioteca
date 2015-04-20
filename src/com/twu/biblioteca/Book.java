@@ -28,7 +28,7 @@ public class Book {
         this.availability = availability;
     }
 
-    public boolean isAvailability() {
+    public boolean isAvailable() {
         return availability;
     }
 

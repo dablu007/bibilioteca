@@ -1,4 +1,7 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.command;
+
+import com.twu.biblioteca.*;
+import org.mockito.internal.matchers.Null;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,32 +11,48 @@ import java.util.ArrayList;
 /**
  * Created by dabluk on 17/04/15.
  */
-public class CheckoutBookCommand implements ICommand{
+public class CheckoutBookCommand implements ICommand {
 
     private ArrayList<Book> books;
     private Library library = new Library();
-    private int checkoutOutput;
+    private Book checkoutOutput;
+
     public CheckoutBookCommand(Library library) {
         books = new ArrayList<Book>();
         this.books = library.getBooks();
-
+        this.library = library;
     }
 
 
     @Override
     public void execute() {
-        for (int i = 0; i < books.size() ; i++) {
-            library.addBooks(books.get(i));
-        }
+
+
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        //    System.out.println("Enter the Book Number for Checkout");
-        //    int bookno = Integer.parseInt(input.readLine());
-        checkoutOutput = library.BookAvilabilityForCheckout(1);
+        IssuedHistory issuedHistory = new IssuedHistory();
+        int bookno = 0;
+        try {
+            System.out.println("Enter the Book Number for Checkout");
+            bookno = Integer.parseInt(input.readLine());
+            System.out.println("Enter the Name of customer");
+            String name = input.readLine();
+            checkoutOutput = library.Checkout(bookno,name);
+
+            if(checkoutOutput != null) {
+                System.out.println("Thank you! Enjoy the book");
+
+            }
+            else
+                System.out.println("That Book is Not Avilable");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //    checkoutOutput = library.BookAvilabilityForCheckout(1);
 
     }
 
-    public int getCheckoutOutput() {
+    public Book getCheckoutOutput() {
         return checkoutOutput;
     }
 }

@@ -1,5 +1,6 @@
 package test.com.twu.biblioteca;
 
+import com.twu.biblioteca.Book;
 import com.twu.biblioteca.IssueDetail;
 import com.twu.biblioteca.IssuedHistory;
 import org.junit.Before;
@@ -13,20 +14,29 @@ import static org.junit.Assert.assertEquals;
  * Created by dabluk on 17/04/15.
  */
 public class IssuedHistoryTests {
-    IssueDetail bookissueDetail;
-    IssuedHistory storageDetails;
-    private ArrayList<IssueDetail> bookStoreDetails = new ArrayList<IssueDetail>();
+
+    IssuedHistory issuedHistory = new IssuedHistory();
+    private ArrayList<IssueDetail> issueDetailList = new ArrayList<IssueDetail>();
     @Before
     public void setup(){
-        bookissueDetail = new IssueDetail("Dablu",1);
-        storageDetails = new IssuedHistory(bookissueDetail);
-        bookissueDetail = new IssueDetail("Vinnet",2);
-        storageDetails = new IssuedHistory(bookissueDetail);
+        IssueDetail bookissueDetail = new IssueDetail("Dablu",new Book(1,"JAVA","Herbert Schield","Sun"));
+        issuedHistory.addIssueDetail(bookissueDetail);
+
     }
     @Test
-    public void ShouldReturnABookAgainstBookNo(){
-        bookStoreDetails = storageDetails.getStorageDetails();
-        assertEquals("Dablu", storageDetails.getPersonName(1));
+    public void ShouldAddAIssueToIssuedHistory(){
+        assertEquals(1, issuedHistory.getIssuedStorageDetails().size());
     }
+
+    @Test
+    public void ShouldReturnACustomerName(){
+        issueDetailList= issuedHistory.getIssuedStorageDetails();
+        Book book = issueDetailList.get(0).getBook();
+    //    System.out.println(book.getBookNo());
+        assertEquals("Dablu", issuedHistory.getCustomerName(book.getBookNo(),issueDetailList));
+    }
+
+
+
 
 }

@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 /**
  * Created by dabluk on 16/04/15.
  */
+import com.twu.biblioteca.command.ReturnBookCommand;
 import com.twu.biblioteca.exception.BookNotFoundException;
 
 import java.util.ArrayList;
@@ -13,9 +14,13 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> books;
-
+    private ArrayList<IssuedHistory> issuedHistories;
+    private IssuedHistory issuedHistory;
+    private ReturnBookCommand returnBookCommand;
     public Library(){
-
+        issuedHistories = new ArrayList<IssuedHistory>();
+        issuedHistory = new IssuedHistory();
+        //returnBookCommand = new ReturnBookCommand();
         books = new ArrayList<Book>();
     }
 
@@ -24,6 +29,13 @@ public class Library {
         return books;
     }
 
+    public IssuedHistory getIssuedHistory() {
+        return issuedHistory;
+    }
+
+    public ArrayList<IssuedHistory> getIssuedHistories() {
+        return issuedHistories;
+    }
 
     public void addBooks(Book book){
             books.add(book);
@@ -38,15 +50,26 @@ public class Library {
         }
         throw new BookNotFoundException("Book with id "+ bookNumber + " not found");
     }
-    public int BookAvilabilityForCheckout(int bookno){
-        int i;
-        for ( i = 0; i < books.size(); i++){
-            if ( books.get(i).getBookNo() == bookno && books.get(i).isAvailability() == true){
-                books.get(i).setAvailability(false);
-                return 1;
+
+
+    public Book Checkout(int index,String name) {
+        if ( books.size() >= index) {
+            for(Book book : books){
+                if (book.getBookNo() == index && book.isAvailable() == true ){
+                    book.setAvailability(false);
+                    IssueDetail issueDetail = new IssueDetail(name,book);
+                    issuedHistory.addIssueDetail(issueDetail);
+                    issuedHistories.add(issuedHistory);
+            //        returnBookCommand.add(issuedHistory);
+                    return book;
+                }
+
             }
+            return null;
         }
-        return 0;
+        else
+            return null;
+
     }
 
 }

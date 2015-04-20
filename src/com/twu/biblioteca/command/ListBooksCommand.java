@@ -25,6 +25,7 @@ public class ListBooksCommand implements ICommand {
         System.out.println("Book No.                Book Name");
         System.out.println("_______                 _________");
         for (int i = 0; i < books.size(); i++) {
+            if(books.get(i).isAvailable())
             System.out.println(books.get(i));
         }
     }

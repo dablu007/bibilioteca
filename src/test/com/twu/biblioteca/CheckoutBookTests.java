@@ -1,8 +1,9 @@
 package test.com.twu.biblioteca;
 
 import com.twu.biblioteca.Book;
-import com.twu.biblioteca.CheckoutBook;
 import com.twu.biblioteca.Library;
+import com.twu.biblioteca.command.CheckoutBookCommand;
+import com.twu.biblioteca.command.ExitCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class CheckoutBookTests {
 
     @Test
     public void ShouldCheckoutABookIfAvilable(){
-        CheckoutBook checkoutBook = new CheckoutBook(library);
+        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
         checkoutBook.execute();
         assertEquals(1, checkoutBook.getCheckoutOutput());
 
@@ -34,10 +35,10 @@ public class CheckoutBookTests {
 
     @Test
     public void ShouldNotThrowExceptionIfBookIsNotAvilable(){
-        CheckoutBook checkoutBook = new CheckoutBook(library);
+        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
         checkoutBook.execute();
         books = library.getBooks();
-    //    System.out.println(books.get(0).isAvailability());
+    //    System.out.println(books.get(0).isAvailable());
         assertEquals(1, checkoutBook.getCheckoutOutput());
     }
 }
