@@ -8,12 +8,12 @@ import java.util.ArrayList;
 /**
  * Created by dabluk on 17/04/15.
  */
-public class CheckoutBook implements ICommand{
+public class CheckoutBookCommand implements ICommand{
 
     private ArrayList<Book> books;
     private Library library = new Library();
     private int checkoutOutput;
-    public CheckoutBook(Library library) {
+    public CheckoutBookCommand(Library library) {
         books = new ArrayList<Book>();
         this.books = library.getBooks();
 
@@ -22,13 +22,13 @@ public class CheckoutBook implements ICommand{
 
     @Override
     public void execute() {
-            for (int i = 0; i < books.size() ; i++) {
-                library.addBooks(books.get(i));
-            }
-            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        for (int i = 0; i < books.size() ; i++) {
+            library.addBooks(books.get(i));
+        }
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         //    System.out.println("Enter the Book Number for Checkout");
         //    int bookno = Integer.parseInt(input.readLine());
-            checkoutOutput = library.BookAvilabilityForCheckout(1);
+        checkoutOutput = library.BookAvilabilityForCheckout(1);
         //    checkoutOutput = library.BookAvilabilityForCheckout(1);
 
     }
