@@ -1,6 +1,6 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.*;
+import com.twu.biblioteca.controller.*;
 import com.twu.biblioteca.exception.BookNotFoundException;
 
 import java.io.BufferedReader;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ReturnBookCommand implements ICommand {
     private ArrayList<Book> books;
-    private  IssuedHistory issuedHistory;
+    private IssuedHistory issuedHistory;
     private ArrayList<IssuedHistory> issuedHistories;
     private Library library = new Library();
 

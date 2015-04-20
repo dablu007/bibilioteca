@@ -1,15 +1,12 @@
 package test.com.twu.biblioteca;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.ICanPrint;
-import com.twu.biblioteca.Library;
+import com.twu.biblioteca.controller.Book;
+import com.twu.biblioteca.controller.ICanPrint;
+import com.twu.biblioteca.controller.Library;
 import com.twu.biblioteca.command.ListBooksCommand;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;

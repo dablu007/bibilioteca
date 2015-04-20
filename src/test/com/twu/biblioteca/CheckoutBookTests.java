@@ -1,9 +1,8 @@
 package test.com.twu.biblioteca;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.Library;
+import com.twu.biblioteca.controller.Book;
+import com.twu.biblioteca.controller.Library;
 import com.twu.biblioteca.command.CheckoutBookCommand;
-import com.twu.biblioteca.command.ExitCommand;
 import org.junit.Before;
 import org.junit.Test;
 

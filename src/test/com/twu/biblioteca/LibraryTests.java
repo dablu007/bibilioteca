@@ -1,8 +1,7 @@
 package test.com.twu.biblioteca;
-import com.twu.biblioteca.Book;
+import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.exception.BookNotFoundException;
-import com.twu.biblioteca.Library;
-import junit.framework.Assert;
+import com.twu.biblioteca.controller.Library;
 import org.junit.Before;
 import org.junit.Test;
 

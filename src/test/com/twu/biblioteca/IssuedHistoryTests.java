@@ -1,8 +1,8 @@
 package test.com.twu.biblioteca;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.IssueDetail;
-import com.twu.biblioteca.IssuedHistory;
+import com.twu.biblioteca.controller.Book;
+import com.twu.biblioteca.controller.IssueDetail;
+import com.twu.biblioteca.controller.IssuedHistory;
 import org.junit.Before;
 import org.junit.Test;
 

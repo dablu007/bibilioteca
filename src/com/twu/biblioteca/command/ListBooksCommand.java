@@ -1,9 +1,9 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.ICanPrint;
-import com.twu.biblioteca.ICommand;
-import com.twu.biblioteca.Library;
+import com.twu.biblioteca.controller.Book;
+import com.twu.biblioteca.controller.ICanPrint;
+import com.twu.biblioteca.controller.ICommand;
+import com.twu.biblioteca.controller.Library;
 
 import java.util.ArrayList;
 

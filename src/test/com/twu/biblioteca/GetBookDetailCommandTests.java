@@ -1,8 +1,8 @@
 package test.com.twu.biblioteca;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.ICanPrint;
-import com.twu.biblioteca.Library;
+import com.twu.biblioteca.controller.Book;
+import com.twu.biblioteca.controller.ICanPrint;
+import com.twu.biblioteca.controller.Library;
 import com.twu.biblioteca.command.GetBookDetailCommand;
 
 import org.junit.Before;

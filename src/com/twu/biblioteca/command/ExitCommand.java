@@ -1,14 +1,6 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.ICommand;
-import com.twu.biblioteca.IssuedHistory;
-import com.twu.biblioteca.Library;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import com.twu.biblioteca.controller.ICommand;
 
 /**
  * Created by dabluk on 16/04/15.
