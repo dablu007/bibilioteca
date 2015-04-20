@@ -24,20 +24,6 @@ public class CheckoutBookTests {
 
     }
 
-    @Test
-    public void ShouldCheckoutABookIfAvilable(){
-        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
-        checkoutBook.execute();
-        assertEquals(1, checkoutBook.getCheckoutOutput());
 
-    }
-
-    @Test
-    public void ShouldNotThrowExceptionIfBookIsNotAvilable(){
-        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
-        checkoutBook.execute();
-        books = library.getBooks();
-        assertEquals(1, checkoutBook.getCheckoutOutput());
-    }
 }
 

@@ -1,15 +1,20 @@
 package test.com.twu.biblioteca;
+import com.twu.biblioteca.command.CheckoutBookCommand;
 import com.twu.biblioteca.controller.Book;
+import com.twu.biblioteca.controller.IssuedHistory;
 import com.twu.biblioteca.exception.BookNotFoundException;
 import com.twu.biblioteca.controller.Library;
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by dabluk on 16/04/15.
@@ -30,8 +35,13 @@ public class LibraryTests {
     @Test
     public void ShouldBeAbleToGetABookFromTheLibrary(){
         ArrayList<Book> books = library.getBooks();
-        book = books.get(0);
-        assertEquals(1, book.getBookNo());
+
+        assertEquals(1, books.size());
+        assertEquals(book, books.get(0));
+
+        books.clear();
+
+        assertEquals(1, library.getBooks().size());
     }
 
     @Test(expected = BookNotFoundException.class)
@@ -52,32 +62,78 @@ public class LibraryTests {
     }
     @Test
     public void ShouldCheckoutAIfBookNoCorrect(){
-        book = library.Checkout(1, "Dablu");
+        book = library.checkout(1, "Dablu");
         assertEquals(1, book.getBookNo());
     }
     @Test
     public void ShouldNotThrowExceptionWhenBookNotAvilable(){
-        book = library.Checkout(5,"Dablu");
+        book = library.checkout(5, "Dablu");
         assertNull(book);
     }
     @Test
     public void ShouldAssignABookIfAvilable(){
-        book = library.Checkout(1,"Dablu");
+        book = library.checkout(1, "Dablu");
         assertEquals(1, book.getBookNo());
     }
+
+    @Test
+    public void ShouldBeAbleToCheckoutDetail(){
+        Library library  = new Library();
+        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        library.addBooks(book);
+
+        Book checkedOutBook = library.checkout(1001, "Some User");
+
+        assertEquals(book, checkedOutBook);
+        assertEquals("Some User", library.getIssueDetail(checkedOutBook.getBookNo()));
+    }
+
     @Test
     public void ShouldReturnNullWhenBookNoIsIvalid(){
-        book = library.Checkout(10,"Dablu");
+        book = library.checkout(10, "Dablu");
         assertNull(book);
     }
     @Test
     public void ShouldNotThrowExceptionWhenBookIsIssued() throws BookNotFoundException{
-        book = library.Checkout(1,"Dablu");
+        book = library.checkout(1, "Dablu");
         assertEquals(1,book.getBookNo());
-        book = library.Checkout(1,"Dablu");
+        book = library.checkout(1, "Dablu");
 
         assertNull(book);
 
 
     }
+
+    @Test
+    public void ShouldReturnABookToLibrary(){
+        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        Library library = new Library();
+        library.addBooks(book);
+        library.checkout(book.getBookNo(), "Dablu");
+        boolean bookIsReturned = library.returnBook(book.getBookNo(),"Dablu");
+        assertTrue(bookIsReturned);
+    }
+
+    @Test
+    public void ShouldReturnFalseWhenReturnedBookIsNotInLibrary(){
+        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        Library library = new Library();
+        library.addBooks(book);
+        library.checkout(5, "Dablu");
+        boolean bookIsReturned = library.returnBook(book.getBookNo(),"Dablu");
+        assertFalse(bookIsReturned);
+    }
+
+    @Test
+    public void ShouldReturnFalseWhenReturnedBookUserNameIsWrong(){
+        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        Library library = new Library();
+        library.addBooks(book);
+        library.checkout(1001, "Dablu");
+        boolean bookIsReturned = library.returnBook(book.getBookNo(),"Dablu Kumar");
+        assertFalse(bookIsReturned);
+    }
+
+
+
 }

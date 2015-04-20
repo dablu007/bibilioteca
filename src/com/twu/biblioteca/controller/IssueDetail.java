@@ -20,4 +20,8 @@ public class IssueDetail {
     public String getCustomerName() {
         return customerName;
     }
+
+    public boolean isForCustomer(String customerName) {
+        return customerName !=null && customerName.equals(this.customerName);
+    }
 }

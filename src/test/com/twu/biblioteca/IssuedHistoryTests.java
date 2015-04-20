@@ -33,7 +33,7 @@ public class IssuedHistoryTests {
         issueDetailList= issuedHistory.getIssuedStorageDetails();
         Book book = issueDetailList.get(0).getBook();
     //    System.out.println(book.getBookNo());
-        assertEquals("Dablu", issuedHistory.getCustomerName(book.getBookNo(),issueDetailList));
+        assertEquals("Dablu", issuedHistory.getIssueDetail(book.getBookNo()));
     }
 
 

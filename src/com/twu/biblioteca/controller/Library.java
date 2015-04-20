@@ -14,26 +14,16 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> books;
-    private ArrayList<IssuedHistory> issuedHistories;
-    private IssuedHistory issuedHistory;
+    private IssuedHistory issuedHistories;
     private ReturnBookCommand returnBookCommand;
+
     public Library(){
-        issuedHistories = new ArrayList<IssuedHistory>();
-        issuedHistory = new IssuedHistory();
+        issuedHistories = new IssuedHistory();
         books = new ArrayList<Book>();
     }
 
     public ArrayList<Book> getBooks() {
-
         return books;
-    }
-
-    public IssuedHistory getIssuedHistory() {
-        return issuedHistory;
-    }
-
-    public ArrayList<IssuedHistory> getIssuedHistories() {
-        return issuedHistories;
     }
 
     public void addBooks(Book book){
@@ -51,24 +41,28 @@ public class Library {
     }
 
 
-    public Book Checkout(int index,String name) {
-        if ( books.size() >= index) {
+    public Book checkout(int bookno, String name) {
             for(Book book : books){
-                if (book.getBookNo() == index && book.isAvailable() == true ){
+                if (book.getBookNo() == bookno && book.isAvailable() == true ){
                     book.setAvailability(false);
                     IssueDetail issueDetail = new IssueDetail(name,book);
-                    issuedHistory.addIssueDetail(issueDetail);
-                    issuedHistories.add(issuedHistory);
+                    issuedHistories.addIssueDetail(issueDetail);
                     return book;
                 }
 
             }
             return null;
-        }
-        else
-            return null;
-
     }
 
+    public IssueDetail getIssueDetail(int checkedOutBookNo) {
+        return issuedHistories.getIssueDetail(checkedOutBookNo);
+    }
+
+    public boolean returnBook(int bookNo,String customerName) {
+        IssueDetail issueDetail = getIssueDetail(bookNo);
+        if (issueDetail == null)
+            return false;
+        return issueDetail.isForCustomer(customerName);
+    }
 }
 
