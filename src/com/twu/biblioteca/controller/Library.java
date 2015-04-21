@@ -6,6 +6,7 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.command.ReturnBookCommand;
 import com.twu.biblioteca.exception.BookNotFoundException;
 
+import java.beans.beancontext.BeanContextMembershipEvent;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +17,13 @@ public class Library {
     private ArrayList<Book> books;
     private IssuedHistory issuedHistories;
     private ReturnBookCommand returnBookCommand;
+    private ArrayList<Movie> movies;
+    private BeanContextMembershipEvent moviesList;
 
     public Library(){
         issuedHistories = new IssuedHistory();
         books = new ArrayList<Book>();
+        movies = new ArrayList<Movie>();
     }
 
     public ArrayList<Book> getBooks() {
@@ -63,6 +67,16 @@ public class Library {
         if (issueDetail == null)
             return false;
         return issueDetail.isForCustomer(customerName);
+    }
+
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+    }
+
+    public ArrayList<Movie> getMoviesList() {
+        if (movies.size() == 0)
+            return null;
+        return movies;
     }
 }
 

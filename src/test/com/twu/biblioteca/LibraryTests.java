@@ -2,13 +2,17 @@ package test.com.twu.biblioteca;
 import com.twu.biblioteca.command.CheckoutBookCommand;
 import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.controller.IssuedHistory;
+import com.twu.biblioteca.controller.Movie;
 import com.twu.biblioteca.exception.BookNotFoundException;
 import com.twu.biblioteca.controller.Library;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
@@ -23,13 +27,15 @@ public class LibraryTests {
 
     Library library;
     Book book;
-
+    String expectedPattern;
+    SimpleDateFormat dateFormat;
     @Before
     public void Setup(){
         library = new Library();
         book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
         library.addBooks(book);
-
+        expectedPattern = "mm/dd/yyyy";
+        dateFormat = new SimpleDateFormat(expectedPattern);
     }
 
     @Test
@@ -134,6 +140,35 @@ public class LibraryTests {
         assertFalse(bookIsReturned);
     }
 
+    @Test
+    public void ShouldAddAMovie(){
+        String date = "14/07/2008";
+        try {
+            Date inputDate =  dateFormat.parse(date);
+            Movie movie = new Movie("The Dark Night",inputDate,8,"Christopher Nolan");
+            library.addMovie(movie);
+            assertEquals(1, library.getMoviesList().size());
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-
+    }
+    @Test
+    public void ShouldReturnNullWhenNoMovieIsPresent(){
+        assertNull(library.getMoviesList());
+    }
+    @Test
+    public void ShouldNotThrowExceptionWhenThereIsNoMoiveAtDesiredIndex(){
+        String date = "14/07/2008";
+        try {
+            Date inputDate =  dateFormat.parse(date);
+            Movie movie = new Movie("The Dark Night",inputDate,8,"Christopher Nolan");
+            library.addMovie(movie);
+            assertEquals(movie, library.getMoviesList().get(0));
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }
