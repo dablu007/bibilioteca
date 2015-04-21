@@ -1,6 +1,7 @@
 package com.twu.biblioteca.command;
 
 import com.twu.biblioteca.controller.ICommand;
+import com.twu.biblioteca.view.Display;
 
 /**
  * Created by dabluk on 16/04/15.
@@ -8,7 +9,7 @@ import com.twu.biblioteca.controller.ICommand;
 public class ExitCommand implements ICommand {
     @Override
     public void execute() {
-        System.out.println("Have A Nice Day");
+        Display.printExit();
         System.exit(0);
     }
 }

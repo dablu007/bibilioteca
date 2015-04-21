@@ -3,6 +3,7 @@ package com.twu.biblioteca.command;
 import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.controller.ICommand;
 import com.twu.biblioteca.controller.Library;
+import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,18 +23,18 @@ public class CheckoutBookCommand implements ICommand {
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Enter the Book Number for checkout");
+            Display.printToGetBookNo();
             int bookno = Integer.parseInt(input.readLine());
-            System.out.println("Enter the Name of customer");
+            Display.printToGetCustomerName();
             String name = input.readLine();
 
             Book checkedoutBook = library.checkout(bookno, name);
 
             if(checkedoutBook != null) {
-                System.out.println("Thank you! Enjoy the book");
+               Display.printBookCheckedOut();
             }
             else
-                System.out.println("That Book is Not Avilable");
+               Display.printBookNotCheckedOut();
         } catch (IOException e) {
             e.printStackTrace();
         }

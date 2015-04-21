@@ -15,15 +15,18 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> books;
+    private ArrayList<Movie> movies;
+    private ArrayList<UserDetail> userDetails ;
     private IssuedHistory issuedHistories;
     private ReturnBookCommand returnBookCommand;
-    private ArrayList<Movie> movies;
     private BeanContextMembershipEvent moviesList;
-
+    private ArrayList<IRentableObject> irentableObjectList;
     public Library(){
         issuedHistories = new IssuedHistory();
         books = new ArrayList<Book>();
         movies = new ArrayList<Movie>();
+        userDetails = new ArrayList<UserDetail>();
+        irentableObjectList = new ArrayList<IRentableObject>();
     }
 
     public ArrayList<Book> getBooks() {
@@ -57,7 +60,15 @@ public class Library {
             }
             return null;
     }
-
+    public Book checkout(IRentableObject object,String name){
+        for(IRentableObject rentableObject: irentableObjectList){
+            if (rentableObject.equals(object)){
+                rentableObject.setAvailability(false);
+            //    IssueDetail issueDetail = new IssueDetail(name,object);
+            //    issuedHistories.addIssueDetail(issueDetail);
+            }
+        }
+    }
     public IssueDetail getIssueDetail(int checkedOutBookNo) {
         return issuedHistories.getIssueDetail(checkedOutBookNo);
     }
@@ -77,6 +88,34 @@ public class Library {
         if (movies.size() == 0)
             return null;
         return movies;
+    }
+
+    public Movie checkoutMovie(String movieName) {
+        ArrayList<Movie> movies = getMoviesList();
+        for (Movie movie:movies){
+            if (movie.isValidForCheckout(movieName) ){
+                movie.setAvailability("Not Available");
+                return movie;
+            }
+        }
+        return null;
+    }
+
+    public void addUser(UserDetail user) {
+        userDetails.add(user);
+    }
+
+    public ArrayList<UserDetail> getUserDetails() {
+        return userDetails;
+    }
+
+
+    public void add(IRentableObject libraryObject) {
+        irentableObjectList.add(libraryObject);
+    }
+
+    public ArrayList<IRentableObject> getObjectList() {
+        return irentableObjectList;
     }
 }
 

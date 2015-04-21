@@ -4,6 +4,7 @@ import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.controller.ICanPrint;
 import com.twu.biblioteca.controller.ICommand;
 import com.twu.biblioteca.controller.Library;
+import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class GetBookDetailCommand implements ICommand {
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Book Number for getting Details");
+            Display.printToGetBookNo();
             int bookno = Integer.parseInt(input.readLine());
             System.out.println("Book No.                Book Name");
             for (int i = 0; i < books.size(); i++) {

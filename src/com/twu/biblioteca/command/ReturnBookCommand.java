@@ -2,6 +2,7 @@ package com.twu.biblioteca.command;
 
 import com.twu.biblioteca.controller.*;
 import com.twu.biblioteca.exception.BookNotFoundException;
+import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,12 +24,15 @@ public class ReturnBookCommand implements ICommand {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
             try {
-                System.out.println("Enter the Book Number You want to Return");
+                Display.printToGetBookNo();
                 int bookno = Integer.parseInt(input.readLine());
-                System.out.println("Enter the Customer Name");
+                Display.printToGetCustomerName();
                 String name = input.readLine();
                 if (library.returnBook(bookno,name)){
-                    System.out.println("Returned");
+                    Display.printBookReturned();
+                }
+                else{
+                    Display.printBookNotReturned();
                 }
 
             } catch (IOException e) {

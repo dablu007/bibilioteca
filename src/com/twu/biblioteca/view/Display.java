@@ -24,5 +24,28 @@ public class Display {
         public static void printBookNotAvilable(){
             System.out.println("Sorry Book Number Entered is Not Avilable");
         }
+        public static void printToGetBookNo(){
+            System.out.println("Enter the Book Number");
+        }
+        public static void printToGetCustomerName(){
+            System.out.println("Enter the Customer Name");
+        }
+        public static void printBookReturned(){
+            System.out.println("Thank you For Returning the Book");
+        }
+        public static void printBookNotReturned(){
+            System.out.println("This is Not a Valid Book to Return");
+        }
+
+        public static void printBookCheckedOut(){
+            System.out.println("Thank you! Enjoy the book");
+        }
+        public static void printBookNotCheckedOut(){
+            System.out.println("That Book is Not Avilable");
+        }
+
+        public static void printExit() {
+            System.out.println("Have A Nice Day..");
+        }
 }
 

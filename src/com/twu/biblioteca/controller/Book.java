@@ -1,11 +1,9 @@
 package com.twu.biblioteca.controller;
 
-import java.util.ArrayList;
-
 /**
  * Created by dabluk on 14/04/15.
  */
-public class Book {
+public class Book implements IRentableObject {
     private int bookNo;
     private String bookName;
     private String bookAuthor;
@@ -35,6 +33,11 @@ public class Book {
     @Override
     public String toString() {
         return String.format("%d%27s", bookNo, bookName);
+    }
+
+
+    public int gethashcode() {
+        return (int) bookNo*bookAuthor.hashCode()*bookName.hashCode()*bookPublication.hashCode();
     }
 
 
