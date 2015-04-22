@@ -48,6 +48,11 @@ public class Movie implements IRentableObject {
         return availability;
     }
 
+    @Override
+    public RentableType getType() {
+        return RentableType.MOVIE;
+    }
+
 
     public String toString() {
         return String.format("%s%27s%7d%27s%37s", movieNo, movieName,movieRating,directorName,dateOfRelease);

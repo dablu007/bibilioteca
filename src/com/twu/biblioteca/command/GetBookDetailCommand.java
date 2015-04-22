@@ -16,7 +16,7 @@ public class GetBookDetailCommand implements ICommand {
     private ArrayList<IRentableObject> rentableObjects;
     public GetBookDetailCommand(Library library) {
         books = new ArrayList<Book>();
-        this.rentableObjects = library.getObjectList();
+        this.rentableObjects = library.getEntityList(RentableType.BOOK);
     }
     
     @Override

@@ -1,9 +1,9 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.controller.ICommand;
 import com.twu.biblioteca.controller.Library;
 import com.twu.biblioteca.controller.Movie;
+import com.twu.biblioteca.controller.RentableType;
 import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
@@ -27,14 +27,14 @@ public class CheckoutMovieCommand implements ICommand {
             Display.printToGetMovie();
             Display.printToGetMovieNo();
             String movieno = (input.readLine());
-            Movie movie = (Movie)library.getObjectDetail(movieno);
+            Movie movie = (Movie)library.isObjectNull(movieno, RentableType.MOVIE);
             Display.printToGetCustomerName();
             String name = input.readLine();
             if ( movie == null){
                 Display.printMovieNotCheckedOut();
             }
             else {
-                Movie checkedoutMovie = (Movie) library.checkoutObject(movie, name);
+                Movie checkedoutMovie = (Movie) library.checkoutEntity(movie, name);
 
                 if (checkedoutMovie != null) {
                     Display.printMovieCheckedOut();

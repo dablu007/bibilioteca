@@ -10,6 +10,7 @@ public class Book implements IRentableObject {
     private String bookPublication;
     private boolean availability;
 
+
     public Book(String bookNo, String bookName, String bookAuthor, String bookPublication){
         this.bookName = bookName;
         this.bookNo = bookNo;
@@ -33,6 +34,11 @@ public class Book implements IRentableObject {
 
     public boolean isAvailable() {
         return availability;
+    }
+
+    @Override
+    public RentableType getType() {
+        return RentableType.BOOK;
     }
 
     @Override

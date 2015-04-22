@@ -2,7 +2,6 @@ package test.com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.controller.Library;
-import com.twu.biblioteca.command.CheckoutBookCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +28,7 @@ public class CheckoutBookTests {
         Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
         library.add(book);
 
-        Book checkedOutBook = (Book)library.checkoutObject(book, "Some User");
+        Book checkedOutBook = (Book)library.checkoutEntity(book, "Some User");
 
         assertEquals(book, checkedOutBook);
 

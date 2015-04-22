@@ -23,11 +23,15 @@ public class IssuedHistory {
 
     public IssueDetail getIssueDetail(IRentableObject rentableObject) {
         for(IssueDetail issueDetail: issueDetails){
-            if ( issueDetail.getRentableObject().gethashcode() == rentableObject.gethashcode()){
+            if ( isSimilar( issueDetail.getRentableObject() , rentableObject)){
                 return issueDetail;
             }
         }
         return null;
+    }
+
+    private boolean isSimilar(IRentableObject rentableObjectfirst, IRentableObject rentableObjectSecond) {
+        return (rentableObjectfirst.gethashcode() == rentableObjectSecond.gethashcode());
     }
 
 }
