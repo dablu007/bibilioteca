@@ -27,12 +27,6 @@ public class IssuedHistory {
                 return issueDetail;
             }
         }
-//        for(IssueDetail issueDetail: issueDetails){
-//            if (issueDetail.getBook.getBookNo() == bookno ){
-//                return issueDetail;
-//            }
-//
-//        }
         return null;
     }
 

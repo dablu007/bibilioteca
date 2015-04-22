@@ -25,10 +25,10 @@ public class GetBookDetailCommandTests {
     @Before
     public void setup(){
         Library library = new Library();
-        Book book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
-        library.addBooks(book);
-        book = new Book(2,"ORACLE","Burleson","ORACLE");
-        library.addBooks(book);
+        Book book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
+        library.add(book);
+        book = new Book("B2","ORACLE","Burleson","ORACLE");
+        library.add(book);
         getBookDetailCommand = new GetBookDetailCommand(library);
     }
 

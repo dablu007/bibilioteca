@@ -3,6 +3,7 @@ package com.twu.biblioteca.command;
 import com.twu.biblioteca.controller.Book;
 import com.twu.biblioteca.controller.ICommand;
 import com.twu.biblioteca.controller.Library;
+import com.twu.biblioteca.controller.Movie;
 import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
@@ -10,12 +11,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by dabluk on 17/04/15.
+ * Created by dabluk on 22/04/15.
  */
-public class CheckoutBookCommand implements ICommand {
+public class CheckoutMovieCommand implements ICommand {
     private Library library;
 
-    public CheckoutBookCommand(Library library) {
+    public CheckoutMovieCommand(Library library) {
         this.library = library;
     }
 
@@ -23,23 +24,22 @@ public class CheckoutBookCommand implements ICommand {
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
-            Display.printToGetBook();
-            Display.printToGetBookNo();
-            String bookno = (input.readLine());
-            Book book = (Book)library.getObjectDetail(bookno);
+            Display.printToGetMovie();
+            Display.printToGetMovieNo();
+            String movieno = (input.readLine());
+            Movie movie = (Movie)library.getObjectDetail(movieno);
             Display.printToGetCustomerName();
             String name = input.readLine();
-            if ( book == null){
-                Display.printBookNotCheckedOut();
+            if ( movie == null){
+                Display.printMovieNotCheckedOut();
             }
             else {
+                Movie checkedoutMovie = (Movie) library.checkoutObject(movie, name);
 
-                Book checkedoutBook = (Book) library.checkoutObject(book, name);
-
-                if (checkedoutBook != null) {
-                    Display.printBookCheckedOut();
+                if (checkedoutMovie != null) {
+                    Display.printMovieCheckedOut();
                 } else
-                    Display.printBookNotCheckedOut();
+                    Display.printMovieNotCheckedOut();
             }
         } catch (IOException e) {
             e.printStackTrace();

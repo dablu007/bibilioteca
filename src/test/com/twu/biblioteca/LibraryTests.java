@@ -30,53 +30,49 @@ public class LibraryTests {
     Date inputDate;
     Movie movie;
     @Before
-    public  void Setup(){
+    public  void Setup() throws ParseException {
         library = new Library();
-        book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
-        library.addBooks(book);
+        book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
+        library.add(book);
         expectedPattern = "mm/dd/yyyy";
         dateFormat = new SimpleDateFormat(expectedPattern);
         String date = "14/07/2008";
-        try {
-            inputDate =  dateFormat.parse(date);
-            movie = new Movie("The Dark Night",inputDate,8,"Christopher Nolan");
-            library.addMovie(movie);
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-    /* Diffrent Test Cases for Listing  and Getting Books from the library */
-    @Test
-    public void ShouldBeAbleToGetABookFromTheLibrary(){
-        ArrayList<Book> books = library.getBooks();
-        assertEquals(1, books.size());
-        assertEquals(book, books.get(0));
-        books.clear();
-        assertEquals(1, library.getBooks().size());
-    }
+        inputDate =  dateFormat.parse(date);
+        movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
+        library.add(movie);
 
-    @Test(expected = BookNotFoundException.class)
-    public void ShouldThrowExceptionWhenBookIsNotThereInLibrary() throws BookNotFoundException {
-        book = library.getBook(100);
     }
-
-    @Test
-    public void ShouldNotThrowExceptionWhenBookIsThereInLibrary() throws BookNotFoundException {
-        book = library.getBook(1);
-        assertNotNull(book);
-        assertEquals(1, book.getBookNo());
-    }
-    @Test
-    public void ShouldAddaBook() throws BookNotFoundException {
-        book = library.getBook(1);
-        assertEquals(1, book.getBookNo());
-    }
+//    /* Diffrent Test Cases for Listing  and Getting Books from the library */
+//    @Test
+//    public void ShouldBeAbleToGetABookFromTheLibrary(){
+//        ArrayList<Book> books = library.getBooks();
+//        assertEquals(1, books.size());
+//        assertEquals(book, books.get(0));
+//        books.clear();
+//        assertEquals(1, library.getBooks().size());
+//    }
+//
+//    @Test(expected = BookNotFoundException.class)
+//    public void ShouldThrowExceptionWhenBookIsNotThereInLibrary() throws BookNotFoundException {
+//        book = library.getBook(100);
+//    }
+//
+//    @Test
+//    public void ShouldNotThrowExceptionWhenBookIsThereInLibrary() throws BookNotFoundException {
+//        book = library.getBook(1);
+//        assertNotNull(book);
+//        assertEquals(1, book.getBookNo());
+//    }
+//    @Test
+//    public void ShouldAddaBook() throws BookNotFoundException {
+//        book = library.getBook(1);
+//        assertEquals(1, book.getBookNo());
+//    }
 
     @Test
     public void ShouldAddBook(){
         library = new Library();
-        book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
+        book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
         library.add(book);
         assertEquals(1, library.getObjectList().size());
     }
@@ -93,7 +89,7 @@ public class LibraryTests {
         String date = "14/07/2008";
         try {
             inputDate =  dateFormat.parse(date);
-            movie = new Movie("The Dark Night",inputDate,8,"Christopher Nolan");
+            movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
             library.add(movie);
             assertEquals(movie,library.getObjectList().get(0));
         }
@@ -102,101 +98,7 @@ public class LibraryTests {
         }
     }
     /* Diffrent Test Cases for Checkout from the library */
-    @Test
-    public void ShouldCheckoutAIfBookNoCorrect(){
-        book = library.checkout(1, "Dablu");
-        assertEquals(1, book.getBookNo());
-    }
-    @Test
-    public void ShouldNotThrowExceptionWhenBookNotAvilable(){
-        book = library.checkout(5, "Dablu");
-        assertNull(book);
-    }
-    @Test
-    public void ShouldAssignABookIfAvilable(){
-        book = library.checkout(1, "Dablu");
-        assertEquals(1, book.getBookNo());
-    }
 
-    @Test
-    public void ShouldBeAbleToCheckoutDetail(){
-        Library library  = new Library();
-        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library.add(book);
-
-        Book checkedOutBook = library.checkout(1001, "Some User");
-
-        assertEquals(book, checkedOutBook);
-     //   assertEquals("Some User", library.getIssueDetail(checkedOutBook.getBookNo()).getCustomerName());
-    }
-
-    @Test
-    public void ShouldReturnNullWhenBookNoIsIvalid(){
-        book = library.checkout(10, "Dablu");
-        assertNull(book);
-    }
-    @Test
-    public void ShouldNotThrowExceptionWhenBookIsIssued() throws BookNotFoundException{
-        book = library.checkout(1, "Dablu");
-        assertEquals(1,book.getBookNo());
-        book = library.checkout(1, "Dablu");
-
-        assertNull(book);
-
-
-    }
-
-    /* Diffrent Test Cases for Returning Book to the library*/
-    @Before
-    public void AddDetailToLibrary(){
-        book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library = new Library();
-        library.addBooks(book);
-    }
-
-
-//    @Test
-//    public void ShouldReturnABookToLibrary(){
-//        library.checkout(book.getBookNo(), "Dablu");
-//        boolean bookIsReturned = library.returnBook(book.getBookNo(),"Dablu");
-//        assertTrue(bookIsReturned);
-//    }
-//
-//    @Test
-//    public void ShouldReturnFalseWhenReturnedBookIsNotInLibrary(){
-//        library.checkout(5, "Dablu");
-//        boolean bookIsReturned = library.returnBook(book.getBookNo(),"Dablu");
-//        assertFalse(bookIsReturned);
-//    }
-//
-//    @Test
-//    public void ShouldReturnFalseWhenReturnedBookUserNameIsWrong(){
-//        library.checkout(1001, "Dablu");
-//        boolean bookIsReturned = library.returnBook(book.getBookNo(),"Dablu Kumar");
-//        assertFalse(bookIsReturned);
-//    }
-
-    /* Diffrent  Test Cases for Adding a movie to library and Checkout of movie */
-    @Test
-    public void ShouldAddAMovie(){
-            assertEquals(1, library.getMoviesList().size());
-    }
-
-    @Test
-    public void ShouldReturnNullWhenNoMovieIsPresent(){
-        assertNull(library.getMoviesList());
-    }
-    @Test
-    public void ShouldNotThrowExceptionWhenThereIsNoMoiveAtDesiredIndex() throws MovieNotFound {
-        if (library.getMoviesList().get(1) == null)
-            throw new MovieNotFound("Movie Not Found");
-        assertEquals(movie, library.getMoviesList().get(0));
-    }
-
-    @Test
-    public void ShouldCheckoutAMovie() {
-        assertEquals(movie, library.checkoutMovie("The Dark Night"));
-    }
 
 
     @Test
@@ -216,7 +118,7 @@ public class LibraryTests {
     @Test
     public void ShouldCheckoutAnBookObject(){
         Library library  = new Library();
-        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
         library.add(book);
 
         Book checkedOutBook = (Book)library.checkoutObject(book, "Some User");
@@ -225,43 +127,72 @@ public class LibraryTests {
 
     }
     @Test
-    public void ShouldChecoutAnMovieObject(){
+    public void ShouldCheckoutAnMovieObject(){
         Movie checoutmovie = (Movie)library.checkoutObject(movie,"Dablu");
         assertEquals(movie, checoutmovie);
     }
     @Test
-    public void ShouldGetACustomerNameAgainstAnObject(){
+    public void ShouldGetACustomerNameAgainstABook(){
         Library library  = new Library();
-        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
         library.add(book);
         Book checkedOutBook = (Book)library.checkoutObject(book, "Dablu");
+
         IssueDetail issueDetail = library.getIssueDetail(book);
         assertEquals("Dablu", issueDetail.getCustomerName());
+
+
+    }
+    @Test
+    public void ShouldGetACustomerNameAgainstAnMovie() throws ParseException {
 
         expectedPattern = "mm/dd/yyyy";
         dateFormat = new SimpleDateFormat(expectedPattern);
         String date = "14/07/2008";
-        try {
+
             inputDate =  dateFormat.parse(date);
-            movie = new Movie("The Dark Night",inputDate,8,"Christopher Nolan");
+            movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
             library.add(movie);
 
             Movie checkoutmovie = (Movie)library.checkoutObject(movie,"dablu");
-            issueDetail = library.getIssueDetail(movie);
+            IssueDetail issueDetail = library.getIssueDetail(movie);
             assertEquals("dablu", issueDetail.getCustomerName());
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+
 
     }
     @Test
-    public void ShouldReturnAnObject(){
+    public void ShouldReturnAnBookIssued(){
         Library library  = new Library();
-        Book book = new Book(1001, "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
         library.add(book);
         Book checkedOutBook = (Book)library.checkoutObject(book, "Dablu");
-        assertTrue(library.returnRentableObject(book,"Dablu"));
+        assertTrue(library.returnRentableObject(book, "Dablu"));
     }
-    @public void 
+
+    @Test
+    public void ShouldCheckForABookNoAndReturnABook(){
+        Library library = new Library();
+        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        library.add(book);
+        assertEquals(book, library.getObjectDetail("B1001"));
+    }
+
+
+    @Test
+    public void ShouldReturnNullWhenAnObjectIsAlreadyCheckedOut(){
+        Library library  = new Library();
+        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        library.add(book);
+        Book checkedOutBook = (Book)library.checkoutObject(book, "Dablu");
+        Book checkedOutBook1 = (Book)library.checkoutObject(book,"Dablu");
+        assertNull(checkedOutBook1);
+    }
+    @Test
+    public void ShouldNotThrowExceptionWhenNoIssueIsPresent(){
+        Library library  = new Library();
+        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
+        library.add(book);
+        assertNull(library.getIssueDetail(book));
+    }
 }

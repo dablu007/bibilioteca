@@ -4,13 +4,13 @@ package com.twu.biblioteca.controller;
  * Created by dabluk on 14/04/15.
  */
 public class Book implements IRentableObject {
-    private int bookNo;
+    private String bookNo;
     private String bookName;
     private String bookAuthor;
     private String bookPublication;
     private boolean availability;
 
-    public Book(int bookNo, String bookName, String bookAuthor, String bookPublication){
+    public Book(String bookNo, String bookName, String bookAuthor, String bookPublication){
         this.bookName = bookName;
         this.bookNo = bookNo;
         this.bookAuthor = bookAuthor;
@@ -18,12 +18,17 @@ public class Book implements IRentableObject {
         this.availability = true;
     }
 
-    public  int getBookNo() {
+    public  String getBookNo() {
         return bookNo;
     }
 
     public void setAvailability(boolean availability) {
         this.availability = availability;
+    }
+
+    @Override
+    public String getObjectNo() {
+        return bookNo;
     }
 
     public boolean isAvailable() {
@@ -32,12 +37,12 @@ public class Book implements IRentableObject {
 
     @Override
     public String toString() {
-        return String.format("%d%27s", bookNo, bookName);
+        return String.format("%s%20s%27s%17s", bookNo, bookName,bookAuthor,bookPublication);
     }
 
 
     public int gethashcode() {
-        return (int) bookNo*bookAuthor.hashCode()*bookName.hashCode()*bookPublication.hashCode();
+        return (int) bookNo.hashCode()*bookAuthor.hashCode()*bookName.hashCode()*bookPublication.hashCode();
     }
 
 

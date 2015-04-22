@@ -16,7 +16,6 @@ public class GetBookDetailCommand implements ICommand {
     private ArrayList<IRentableObject> rentableObjects;
     public GetBookDetailCommand(Library library) {
         books = new ArrayList<Book>();
-    //    this.books = library.getBooks();
         this.rentableObjects = library.getObjectList();
     }
     
@@ -30,10 +29,10 @@ public class GetBookDetailCommand implements ICommand {
         }
         try {
             Display.printToGetBookNo();
-            int bookno = Integer.parseInt(input.readLine());
+            String bookno = (input.readLine());
             System.out.println("Book No.                Book Name");
             for (int i = 0; i < books.size(); i++) {
-                if ( books.get(i).getBookNo() == bookno){
+                if ( books.get(i).getBookNo().equals(bookno)){
                     System.out.println(books.get(i));
                 }
             }

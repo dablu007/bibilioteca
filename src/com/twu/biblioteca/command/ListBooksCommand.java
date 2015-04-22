@@ -1,6 +1,7 @@
 package com.twu.biblioteca.command;
 
 import com.twu.biblioteca.controller.*;
+import com.twu.biblioteca.view.Display;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,6 @@ public class ListBooksCommand implements ICommand {
     private ArrayList<IRentableObject> rentableObjects;
     public ListBooksCommand(Library library) {
         books = new ArrayList<Book>();
-    //    this.books = library.getBooks();
         this.rentableObjects = library.getObjectList();
     }
     @Override
@@ -22,11 +22,8 @@ public class ListBooksCommand implements ICommand {
                 books.add((Book) object);
             }
         }
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.println("---------------Avilable Books------------------");
-        System.out.println("Book No.                Book Name");
-        System.out.println("_______                 _________");
+        Display.printBooksList();
+
         for (int i = 0; i < books.size(); i++) {
             if(books.get(i).isAvailable())
             System.out.println(books.get(i));

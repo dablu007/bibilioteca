@@ -22,6 +22,7 @@ public class Library {
     private ReturnBookCommand returnBookCommand;
     private BeanContextMembershipEvent moviesList;
     private ArrayList<IRentableObject> irentableObjectList;
+
     public Library(){
         issuedHistories = new IssuedHistory();
         books = new ArrayList<Book>();
@@ -30,70 +31,7 @@ public class Library {
         irentableObjectList = new ArrayList<IRentableObject>();
     }
 
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
 
-    public void addBooks(Book book){
-            books.add(book);
-    }
-
-
-    public Book getBook(int bookNumber) throws BookNotFoundException {
-        for (int i = 0; i<books.size(); i++){
-            if(books.get(i).getBookNo() == bookNumber){
-                return books.get(i);
-            }
-        }
-        throw new BookNotFoundException("Book with id "+ bookNumber + " not found");
-    }
-
-
-    public Book checkout(int bookno, String name) {
-            for(Book book : books){
-                if (book.getBookNo() == bookno && book.isAvailable() == true ){
-                    book.setAvailability(false);
-                    IssueDetail issueDetail = new IssueDetail(name,book);
-                    issuedHistories.addIssueDetail(issueDetail);
-                    return book;
-                }
-
-            }
-            return null;
-    }
-
-//    public IssueDetail getIssueDetail(int checkedOutBookNo) {
-//        return issuedHistories.getIssueDetail(checkedOutBookNo);
-//        return null;
-//    }
-
-//    public boolean returnBook(int bookNo,String customerName) {
-//        IssueDetail issueDetail = getIssueDetail(bookNo);
-//        if (issueDetail == null)
-//            return false;
-//        return issueDetail.isForCustomer(customerName);
-//    }
-
-    public void addMovie(Movie movie) {
-        movies.add(movie);
-    }
-
-    public ArrayList<Movie> getMoviesList() {
-        if (movies.size() == 0)
-            return null;
-        return movies;
-    }
-
-    public Movie checkoutMovie(String movieName) {
-        ArrayList<Movie> movies = getMoviesList();
-        for (Movie movie:movies){
-            if (movie.isValidForCheckout(movieName) ){
-                movie.setAvailability(false);
-                return movie;
-            }
-        }
-        return null;
-    }
 
     public void addUser(UserDetail user) {
         userDetails.add(user);
@@ -114,7 +52,7 @@ public class Library {
     public IRentableObject checkoutObject(IRentableObject rentableObject,String customerName){
         ArrayList<IRentableObject> rentableObjects = getObjectList();
         for(IRentableObject object:rentableObjects){
-            if(object.gethashcode() == rentableObject.gethashcode()){
+            if(object.gethashcode() == rentableObject.gethashcode() && object.isAvailable() ){
                 IssueDetail issueDetail = new IssueDetail(customerName,object);
                 issuedHistories.addIssueDetail(issueDetail);
                 object.setAvailability(false);
@@ -123,6 +61,7 @@ public class Library {
         }
         return null;
     }
+
     public IssueDetail getIssueDetail(IRentableObject rentableObject) {
         return issuedHistories.getIssueDetail(rentableObject);
     }
@@ -132,6 +71,15 @@ public class Library {
         if (issueDetail == null)
             return false;
         return issueDetail.isForCustomer(customerName);
+    }
+
+    public IRentableObject getObjectDetail(String no) {
+        for(IRentableObject object:irentableObjectList){
+            if(object.getObjectNo().equals(no)){
+                return object;
+            }
+        }
+        return null;
     }
 }
 

@@ -20,8 +20,8 @@ public class ListBooksCommandTests {
     @Before
     public void setup(){
         Library library = new Library();
-        Book book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
-        library.addBooks(book);
+        Book book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
+        library.add(book);
         listBooksCommand = new ListBooksCommand(library);
     }
 

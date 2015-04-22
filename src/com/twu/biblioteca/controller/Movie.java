@@ -7,17 +7,18 @@ import java.util.Date;
  */
 public class Movie implements IRentableObject {
     private String movieName;
-    private Date yearOfRelease;
+    private Date dateOfRelease;
     private String directorName;
     private int movieRating;
     private boolean availability;
-
-    public Movie(String movieName, Date yearOfRelease, int movieRating, String directorName) {
+    private  String movieNo ;
+    public Movie(String movieNo,String movieName, Date dateOfRelease, int movieRating, String directorName) {
         this.movieName = movieName;
-        this.yearOfRelease = yearOfRelease;
+        this.dateOfRelease = dateOfRelease;
         this.movieRating = movieRating;
         this.directorName = directorName;
         this.availability = true;
+        this.movieNo = movieNo;
     }
 
     public String getMoviename() {
@@ -33,7 +34,22 @@ public class Movie implements IRentableObject {
     }
 
     @Override
+    public String getObjectNo() {
+        return movieNo;
+    }
+
+    @Override
     public int gethashcode() {
-        return (int) movieName.hashCode()*yearOfRelease.hashCode()*directorName.hashCode()*movieRating;
+        return (int) movieName.hashCode()* dateOfRelease.hashCode()*directorName.hashCode()*movieRating*movieNo.hashCode();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return availability;
+    }
+
+
+    public String toString() {
+        return String.format("%s%27s%7d%27s%37s", movieNo, movieName,movieRating,directorName,dateOfRelease);
     }
 }

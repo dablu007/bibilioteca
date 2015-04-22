@@ -19,7 +19,7 @@ public class IssuedHistoryTests {
     private ArrayList<IssueDetail> issueDetailList = new ArrayList<IssueDetail>();
     @Before
     public void setup(){
-        IssueDetail bookissueDetail = new IssueDetail("Dablu",new Book(1,"JAVA","Herbert Schield","Sun"));
+        IssueDetail bookissueDetail = new IssueDetail("Dablu",new Book("B1","JAVA","Herbert Schield","Sun"));
         issuedHistory.addIssueDetail(bookissueDetail);
 
     }
