@@ -24,18 +24,27 @@ public class ReturnBookCommand implements ICommand {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
             try {
+                Display.printToGetBook();
                 Display.printToGetBookNo();
                 int bookno = Integer.parseInt(input.readLine());
+                Display.printToGetBookName();
+                String bookname = input.readLine();
+                Display.printToGetBookAuthor();
+                String bookauthor = input.readLine();
+                Display.printToGetBookPublication();
+                String bookPublication = input.readLine();
                 Display.printToGetCustomerName();
                 String name = input.readLine();
-                if (library.returnBook(bookno,name)){
+                Book book = new Book(bookno,bookname,bookauthor,bookPublication);
+                if (library.returnRentableObject(book,name)){
                     Display.printBookReturned();
                 }
                 else{
                     Display.printBookNotReturned();
                 }
 
-            } catch (IOException e) {
+            }
+                catch (IOException e) {
                 e.printStackTrace();
             }
 

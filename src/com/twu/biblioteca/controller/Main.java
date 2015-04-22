@@ -15,13 +15,13 @@ public class Main {
         Library library = new Library();
         Book book;
         book = new Book(1, "JAVA", "Herbert Schildt", "TMH");
-        library.addBooks(book);
+        library.add(book);
         book = new Book(2, "C", "Dennis Richie", "Sun");
-        library.addBooks(book);
+        library.add(book);
         book = new Book(3, "ORACLE", "Harish Gaur", "TMH");
-        library.addBooks(book);
+        library.add(book);
         book = new Book(4, "C++", "Herbert Schildt", "TMH");
-        library.addBooks(book);
+        library.add(book);
         Display display = new Display(); //TODO:
         display.welcomeMessage();
 

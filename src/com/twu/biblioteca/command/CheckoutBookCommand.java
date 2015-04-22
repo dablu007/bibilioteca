@@ -23,12 +23,19 @@ public class CheckoutBookCommand implements ICommand {
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
+            Display.printToGetBook();
             Display.printToGetBookNo();
             int bookno = Integer.parseInt(input.readLine());
+            Display.printToGetBookName();
+            String bookname = input.readLine();
+            Display.printToGetBookAuthor();
+            String bookauthor = input.readLine();
+            Display.printToGetBookPublication();
+            String bookPublication = input.readLine();
             Display.printToGetCustomerName();
             String name = input.readLine();
-
-            Book checkedoutBook = library.checkout(bookno, name);
+            Book book = new Book(bookno,bookname,bookauthor,bookPublication);
+            Book checkedoutBook = (Book)library.checkoutObject(book,name);
 
             if(checkedoutBook != null) {
                Display.printBookCheckedOut();

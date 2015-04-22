@@ -5,4 +5,5 @@ package com.twu.biblioteca.controller;
  */
 public interface IRentableObject {
     public void setAvailability(boolean value);
+    public int gethashcode();
 }

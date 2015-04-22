@@ -31,4 +31,9 @@ public class Movie implements IRentableObject {
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
+
+    @Override
+    public int gethashcode() {
+        return (int) movieName.hashCode()*yearOfRelease.hashCode()*directorName.hashCode()*movieRating;
+    }
 }

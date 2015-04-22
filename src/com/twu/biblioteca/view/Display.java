@@ -24,8 +24,8 @@ public class Display {
         public static void printBookNotAvilable(){
             System.out.println("Sorry Book Number Entered is Not Avilable");
         }
-        public static void printToGetBookNo(){
-            System.out.println("Enter the Book Number");
+        public static void printToGetBook(){
+            System.out.println("Enter the Book Details");
         }
         public static void printToGetCustomerName(){
             System.out.println("Enter the Customer Name");
@@ -46,6 +46,22 @@ public class Display {
 
         public static void printExit() {
             System.out.println("Have A Nice Day..");
+        }
+
+        public static void printToGetBookNo() {
+            System.out.println("Enter the Book No.");
+        }
+
+        public static void printToGetBookName() {
+            System.out.println("Enter the Book Name");
+        }
+
+        public static void printToGetBookAuthor() {
+            System.out.println("Enter the Book Author");
+        }
+
+        public static void printToGetBookPublication() {
+            System.out.println("Enter the Book Publication");
         }
 }
 

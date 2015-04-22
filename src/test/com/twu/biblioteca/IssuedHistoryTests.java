@@ -31,9 +31,9 @@ public class IssuedHistoryTests {
     @Test
     public void ShouldReturnACustomerName(){
         issueDetailList= issuedHistory.getIssuedStorageDetails();
-        Book book = issueDetailList.get(0).getBook();
+        Book book = (Book)issueDetailList.get(0).getRentableObject();
     //    System.out.println(book.getBookNo());
-        assertEquals("Dablu", issuedHistory.getIssueDetail(book.getBookNo()));
+        assertEquals("Dablu", issuedHistory.getIssueDetail(book));
     }
 
 

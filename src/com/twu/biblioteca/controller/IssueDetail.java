@@ -4,17 +4,17 @@ package com.twu.biblioteca.controller;
  * Created by dabluk on 17/04/15.
  */
 public class IssueDetail {
-    private Book book;
     private String customerName;
+    private IRentableObject rentableObject;
 
-    public IssueDetail(String name, Book book) {
-        this.book = book;
+    public IssueDetail(String name, IRentableObject rentableObject) {
         this.customerName = name;
+        this.rentableObject = rentableObject;
 
     }
 
-    public Book getBook() {
-        return book;
+    public IRentableObject getRentableObject() {
+        return rentableObject;
     }
 
     public String getCustomerName() {

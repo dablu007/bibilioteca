@@ -21,13 +21,18 @@ public class IssuedHistory {
         return issueDetails;
     }
 
-    public IssueDetail getIssueDetail(int bookno) {
+    public IssueDetail getIssueDetail(IRentableObject rentableObject) {
         for(IssueDetail issueDetail: issueDetails){
-            if (issueDetail.getBook().getBookNo() == bookno ){
+            if ( issueDetail.getRentableObject().gethashcode() == rentableObject.gethashcode()){
                 return issueDetail;
             }
-
         }
+//        for(IssueDetail issueDetail: issueDetails){
+//            if (issueDetail.getBook.getBookNo() == bookno ){
+//                return issueDetail;
+//            }
+//
+//        }
         return null;
     }
 

@@ -1,9 +1,6 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.controller.Book;
-import com.twu.biblioteca.controller.ICanPrint;
-import com.twu.biblioteca.controller.ICommand;
-import com.twu.biblioteca.controller.Library;
+import com.twu.biblioteca.controller.*;
 
 import java.util.ArrayList;
 
@@ -12,13 +9,19 @@ import java.util.ArrayList;
  */
 public class ListBooksCommand implements ICommand {
     private  ArrayList<Book> books;
-
-    public ListBooksCommand(Library app) {
+    private ArrayList<IRentableObject> rentableObjects;
+    public ListBooksCommand(Library library) {
         books = new ArrayList<Book>();
-        this.books = app.getBooks();
+    //    this.books = library.getBooks();
+        this.rentableObjects = library.getObjectList();
     }
     @Override
     public void execute() {
+        for(IRentableObject object: rentableObjects){
+            if (object instanceof Book){
+                books.add((Book) object);
+            }
+        }
         System.out.print("\033[H\033[2J");
         System.out.flush();
         System.out.println("---------------Avilable Books------------------");

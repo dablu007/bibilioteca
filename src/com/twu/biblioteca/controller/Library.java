@@ -5,6 +5,7 @@ package com.twu.biblioteca.controller;
  */
 import com.twu.biblioteca.command.ReturnBookCommand;
 import com.twu.biblioteca.exception.BookNotFoundException;
+import org.junit.Test;
 
 import java.beans.beancontext.BeanContextMembershipEvent;
 import java.util.ArrayList;
@@ -60,25 +61,18 @@ public class Library {
             }
             return null;
     }
-    public Book checkout(IRentableObject object,String name){
-        for(IRentableObject rentableObject: irentableObjectList){
-            if (rentableObject.equals(object)){
-                rentableObject.setAvailability(false);
-            //    IssueDetail issueDetail = new IssueDetail(name,object);
-            //    issuedHistories.addIssueDetail(issueDetail);
-            }
-        }
-    }
-    public IssueDetail getIssueDetail(int checkedOutBookNo) {
-        return issuedHistories.getIssueDetail(checkedOutBookNo);
-    }
 
-    public boolean returnBook(int bookNo,String customerName) {
-        IssueDetail issueDetail = getIssueDetail(bookNo);
-        if (issueDetail == null)
-            return false;
-        return issueDetail.isForCustomer(customerName);
-    }
+//    public IssueDetail getIssueDetail(int checkedOutBookNo) {
+//        return issuedHistories.getIssueDetail(checkedOutBookNo);
+//        return null;
+//    }
+
+//    public boolean returnBook(int bookNo,String customerName) {
+//        IssueDetail issueDetail = getIssueDetail(bookNo);
+//        if (issueDetail == null)
+//            return false;
+//        return issueDetail.isForCustomer(customerName);
+//    }
 
     public void addMovie(Movie movie) {
         movies.add(movie);
@@ -94,7 +88,7 @@ public class Library {
         ArrayList<Movie> movies = getMoviesList();
         for (Movie movie:movies){
             if (movie.isValidForCheckout(movieName) ){
-                movie.setAvailability("Not Available");
+                movie.setAvailability(false);
                 return movie;
             }
         }
@@ -116,6 +110,28 @@ public class Library {
 
     public ArrayList<IRentableObject> getObjectList() {
         return irentableObjectList;
+    }
+    public IRentableObject checkoutObject(IRentableObject rentableObject,String customerName){
+        ArrayList<IRentableObject> rentableObjects = getObjectList();
+        for(IRentableObject object:rentableObjects){
+            if(object.gethashcode() == rentableObject.gethashcode()){
+                IssueDetail issueDetail = new IssueDetail(customerName,object);
+                issuedHistories.addIssueDetail(issueDetail);
+                object.setAvailability(false);
+                return object;
+            }
+        }
+        return null;
+    }
+    public IssueDetail getIssueDetail(IRentableObject rentableObject) {
+        return issuedHistories.getIssueDetail(rentableObject);
+    }
+
+    public boolean returnRentableObject(IRentableObject rentableObject, String customerName) {
+        IssueDetail issueDetail = getIssueDetail(rentableObject);
+        if (issueDetail == null)
+            return false;
+        return issueDetail.isForCustomer(customerName);
     }
 }
 

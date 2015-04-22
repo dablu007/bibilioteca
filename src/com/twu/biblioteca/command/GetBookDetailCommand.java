@@ -1,9 +1,6 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.controller.Book;
-import com.twu.biblioteca.controller.ICanPrint;
-import com.twu.biblioteca.controller.ICommand;
-import com.twu.biblioteca.controller.Library;
+import com.twu.biblioteca.controller.*;
 import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
@@ -16,14 +13,21 @@ import java.util.*;
  */
 public class GetBookDetailCommand implements ICommand {
     private ArrayList<Book> books;
+    private ArrayList<IRentableObject> rentableObjects;
     public GetBookDetailCommand(Library library) {
         books = new ArrayList<Book>();
-        this.books = library.getBooks();
+    //    this.books = library.getBooks();
+        this.rentableObjects = library.getObjectList();
     }
     
     @Override
     public void execute() {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        for(IRentableObject object: rentableObjects){
+            if (object instanceof Book){
+                books.add((Book) object);
+            }
+        }
         try {
             Display.printToGetBookNo();
             int bookno = Integer.parseInt(input.readLine());
@@ -33,6 +37,7 @@ public class GetBookDetailCommand implements ICommand {
                     System.out.println(books.get(i));
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
