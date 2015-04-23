@@ -27,7 +27,7 @@ public class CheckoutMovieCommand implements ICommand {
             Display.printToGetMovie();
             Display.printToGetMovieNo();
             String movieno = (input.readLine());
-            Movie movie = (Movie)library.isObjectNull(movieno, RentableType.MOVIE);
+            Movie movie = (Movie)library.getRentableObject(movieno, RentableType.MOVIE);
             Display.printToGetCustomerName();
             String name = input.readLine();
             if ( movie == null){

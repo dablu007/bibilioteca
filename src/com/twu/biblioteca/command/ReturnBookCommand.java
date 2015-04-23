@@ -28,7 +28,7 @@ public class ReturnBookCommand implements ICommand {
 
                 Display.printToGetCustomerName();
                 String name = input.readLine();
-                Book book = (Book)library.isObjectNull(bookno,RentableType.BOOK);
+                Book book = (Book)library.getRentableObject(bookno, RentableType.BOOK);
                 if (library.returnRentableObject(book,name)){
                     book.setAvailability(true);
                     Display.printBookReturned();

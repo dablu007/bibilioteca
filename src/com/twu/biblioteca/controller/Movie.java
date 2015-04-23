@@ -34,14 +34,11 @@ public class Movie implements IRentableObject {
     }
 
     @Override
-    public String getObjectNo() {
+    public String getId() {
         return movieNo;
     }
 
-    @Override
-    public int gethashcode() {
-        return (int) movieName.hashCode()* dateOfRelease.hashCode()*directorName.hashCode()*movieRating*movieNo.hashCode();
-    }
+
 
     @Override
     public boolean isAvailable() {

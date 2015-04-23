@@ -14,7 +14,7 @@ public class IssueDetail {
     }
 
     public IRentableObject getRentableObject() {
-        return rentableObject;
+        return (IRentableObject) rentableObject;
     }
 
     public String getCustomerName() {

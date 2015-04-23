@@ -20,7 +20,7 @@ public class BookTests {
     public void ShouldBeEqualToAnotherBook(){
         Book book1 = new Book("B1", "Java", "Some auther", "ISBN");
         Book book2 = new Book("B1", "Java", "Some auther", "ISBN");
-        assertEquals(book1.gethashcode(),book2.gethashcode());
+        assertTrue(book1.equals(book2));
     }
 
 

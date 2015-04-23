@@ -31,7 +31,7 @@ public class IssuedHistory {
     }
 
     private boolean isSimilar(IRentableObject rentableObjectfirst, IRentableObject rentableObjectSecond) {
-        return (rentableObjectfirst.gethashcode() == rentableObjectSecond.gethashcode());
+        return (rentableObjectfirst == rentableObjectSecond);
     }
 
 }

@@ -28,7 +28,7 @@ public class Book implements IRentableObject {
     }
 
     @Override
-    public String getObjectNo() {
+    public String getId() {
         return bookNo;
     }
 
@@ -46,10 +46,29 @@ public class Book implements IRentableObject {
         return String.format("%s%20s%27s%17s", bookNo, bookName,bookAuthor,bookPublication);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public int gethashcode() {
-        return (int) bookNo.hashCode()*bookAuthor.hashCode()*bookName.hashCode()*bookPublication.hashCode();
+        Book book = (Book) o;
+
+        if (availability != book.availability) return false;
+
+        if (!bookNo.equals(book.bookNo)) return false;
+        if (!bookName.equals(book.bookName)) return false;
+        if (!bookAuthor.equals(book.bookAuthor)) return false;
+        return bookPublication.equals(book.bookPublication);
+
     }
 
-
+    @Override
+    public int hashCode() {
+        int result = bookNo.hashCode();
+        result = 31 * result + bookName.hashCode();
+        result = 31 * result + bookAuthor.hashCode();
+        result = 31 * result + bookPublication.hashCode();
+        result = 31 * result + (availability ? 1 : 0);
+        return result;
+    }
 }

@@ -6,5 +6,6 @@ package com.twu.biblioteca.controller;
 
 public enum RentableType{
     BOOK,
-    MOVIE;
+    MOVIE,
+    USER;
 }

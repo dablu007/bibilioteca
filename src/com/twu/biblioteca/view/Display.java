@@ -82,5 +82,21 @@ public class Display {
     public static void printToGetMovieNo() {
         System.out.println("Enter the Movie Number");
     }
+
+    public static void printTogetUserID() {
+        System.out.println("Enter the User Library Number");
+    }
+
+    public static void printTogetPassword() {
+        System.out.println("Enter the Password");
+    }
+
+    public static void printInvalidPassword() {
+        System.out.println("Invalid Credentials given please give the Correct One.");
+    }
+
+    public static void printBook() {
+        System.out.println(String.format("%s%17s%17s%27s","Book No.","BookName","Author","Publication"));
+    }
 }
 

@@ -30,7 +30,7 @@ public class GetBookDetailCommand implements ICommand {
         try {
             Display.printToGetBookNo();
             String bookno = (input.readLine());
-            System.out.println("Book No.                Book Name");
+            Display.printBook();
             for (int i = 0; i < books.size(); i++) {
                 if ( books.get(i).getBookNo().equals(bookno)){
                     System.out.println(books.get(i));

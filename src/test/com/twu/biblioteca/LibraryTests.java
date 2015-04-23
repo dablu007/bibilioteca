@@ -3,6 +3,7 @@ import com.twu.biblioteca.controller.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.management.MalformedObjectNameException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class LibraryTests {
     SimpleDateFormat dateFormat;
     Date inputDate;
     Movie movie;
+
+
     @Before
     public  void Setup() throws ParseException {
         library = new Library();
@@ -33,105 +36,38 @@ public class LibraryTests {
         expectedPattern = "mm/dd/yyyy";
         dateFormat = new SimpleDateFormat(expectedPattern);
         String date = "14/07/2008";
-        inputDate =  dateFormat.parse(date);
-        movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
+        inputDate = dateFormat.parse(date);
+        movie = new Movie("Mov1", "The Dark Night", inputDate, 8, "Christopher Nolan");
         library.add(movie);
-
-    }
-//    /* Diffrent Test Cases for Listing  and Getting Books from the library */
-//    @Test
-//    public void ShouldBeAbleToGetABookFromTheLibrary(){
-//        ArrayList<Book> books = library.getBooks();
-//        assertEquals(1, books.size());
-//        assertEquals(book, books.get(0));
-//        books.clear();
-//        assertEquals(1, library.getBooks().size());
-//    }
-//
-//    @Test(expected = BookNotFoundException.class)
-//    public void ShouldThrowExceptionWhenBookIsNotThereInLibrary() throws BookNotFoundException {
-//        book = library.getBook(100);
-//    }
-//
-//    @Test
-//    public void ShouldNotThrowExceptionWhenBookIsThereInLibrary() throws BookNotFoundException {
-//        book = library.getBook(1);
-//        assertNotNull(book);
-//        assertEquals(1, book.getBookNo());
-//    }
-//    @Test
-//    public void ShouldAddaBook() throws BookNotFoundException {
-//        book = library.getBook(1);
-//        assertEquals(1, book.getBookNo());
-//    }
-
-    @Test
-    public void ShouldAddBook(){
-        library = new Library();
-        book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
-        library.add(book);
-        assertEquals(1, library.getEntityList(RentableType.BOOK).size());
     }
 
-    @Test
-    public void ShouldAddMovie(){
-        library.add(movie);
-        assertEquals(1, library.getEntityList(RentableType.MOVIE).size());
-    }
     @Test
     public void ShouldCheckForAAddedMovie(){
-        expectedPattern = "mm/dd/yyyy";
-        dateFormat = new SimpleDateFormat(expectedPattern);
-        String date = "14/07/2008";
-        try {
-            inputDate =  dateFormat.parse(date);
-            movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
-            library.add(movie);
-            assertEquals(movie,library.getEntityList(RentableType.MOVIE).get(1));
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
+        assertEquals(movie,library.getEntityList(RentableType.MOVIE).get(0));
     }
     /* Diffrent Test Cases for Checkout from the library */
 
 
-
     @Test
-    public void ShouldAddAUser(){
-        UserDetail user = new UserDetail("Dablu","dablu@gmail.com","7679406898");
-        library.addUser(user);
-        assertEquals(1, library.getUserDetails().size());
-    }
+    public void ShouldCheckoutAnBook(){
+        User user = new User("1001", "Username", "as@asd.com", "131313", "password");
+        user.IsLoggedIn = false;
 
-    @Test
-    public void ShouldGiveTheDetailsOfAUser(){
-
-    }
+        library.checkoutEntity(book, user);
 
 
-    @Test
-    public void ShouldCheckoutAnBookObject(){
-        Library library  = new Library();
-        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library.add(book);
         Book checkedOutBook = (Book)library.checkoutEntity(book, "Some User");
-
         assertEquals(book, checkedOutBook);
 
     }
     @Test
-    public void ShouldCheckoutAnMovieObject(){
+    public void ShouldCheckoutAnMovie(){
         Movie checoutmovie = (Movie)library.checkoutEntity(movie, "Dablu");
         assertEquals(movie, checoutmovie);
     }
     @Test
     public void ShouldGetACustomerNameAgainstABook(){
-        Library library  = new Library();
-        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library.add(book);
         Book checkedOutBook = (Book)library.checkoutEntity(book, "Dablu");
-
         IssueDetail issueDetail = library.getIssueDetail(book);
         assertEquals("Dablu", issueDetail.getCustomerName());
 
@@ -139,37 +75,20 @@ public class LibraryTests {
     }
     @Test
     public void ShouldGetACustomerNameAgainstAnMovie() throws ParseException {
-
-        expectedPattern = "mm/dd/yyyy";
-        dateFormat = new SimpleDateFormat(expectedPattern);
-        String date = "14/07/2008";
-
-            inputDate =  dateFormat.parse(date);
-            movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
-            library.add(movie);
-
             Movie checkoutmovie = (Movie)library.checkoutEntity(movie, "dablu");
             IssueDetail issueDetail = library.getIssueDetail(movie);
             assertEquals("dablu", issueDetail.getCustomerName());
-
-
-
     }
+
     @Test
     public void ShouldReturnAnBookIssued(){
-        Library library  = new Library();
-        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library.add(book);
         Book checkedOutBook = (Book)library.checkoutEntity(book, "Dablu");
         assertTrue(library.returnRentableObject(book, "Dablu"));
     }
 
     @Test
     public void ShouldCheckForABookNoInLibraryAndGiveTheSameBook(){
-        Library library = new Library();
-        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library.add(book);
-        assertEquals(book, library.isObjectNull("B1001",RentableType.BOOK));
+        assertEquals(book, library.getRentableObject("B1", RentableType.BOOK));
     }
 
 
@@ -191,10 +110,7 @@ public class LibraryTests {
     }
     @Test
     public void ShouldShowAListofBooks(){
-        Library library  = new Library();
-        Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
-        library.add(book);
-        book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
+        book = new Book("B1001", "JAVA", "Herbert Schildt", "TMH");
         library.add(book);
         book = new Book("B2", "C", "Dennis Richie", "Sun");
         library.add(book);
@@ -204,26 +120,23 @@ public class LibraryTests {
         library.add(book);
 
         ArrayList<IRentableObject> books = library.getEntityList(RentableType.BOOK);
-        assertEquals(book.gethashcode(), books.get(4).gethashcode());
+        assertEquals(book, books.get(4));
 
     }
     @Test
     public void ShouldShowAlistOfMovies() throws ParseException {
-        expectedPattern = "mm/dd/yyyy";
-        dateFormat = new SimpleDateFormat(expectedPattern);
-        String date = "14/07/2008";
-        inputDate =  dateFormat.parse(date);
-        movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
-        library.add(movie);
-
+        //TODO
         movie = new Movie("Mov2","Fast and Furious 7",inputDate,7,"James Wan");
         library.add(movie);
         movie = new Movie("Mov3","The Dark Knight Rises",inputDate,9,"Christopher Nolan");
         library.add(movie);
         ArrayList<IRentableObject> movies = library.getEntityList(RentableType.MOVIE);
-        System.out.println(movie);
-        assertEquals(movie.gethashcode(), movies.get(3).gethashcode());
-
+        assertEquals(movie, movies.get(2));
     }
+
+
+
+
+
 
 }

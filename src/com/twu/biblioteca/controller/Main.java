@@ -16,46 +16,39 @@ import static org.junit.Assert.assertEquals;
  * Created by dabluk on 14/04/15.
  */
 public class Main {
+    static Library library = new Library();
+    static Book book;
+    static String expectedPattern;
+    static SimpleDateFormat dateFormat;
+    static Date inputDate;
+    static Movie movie;
+    static User user;
+    static ManageUser manageUser = new ManageUser();
+
     public static void main(String args[]) throws ParseException {
-        Library library = new Library();
-        Book book;
-        String expectedPattern;
-        SimpleDateFormat dateFormat;
-        Date inputDate;
-        Movie movie;
-        book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
-        library.add(book);
-        book = new Book("B2", "C", "Dennis Richie", "Sun");
-        library.add(book);
-        book = new Book("B3", "ORACLE", "Harish Gaur", "TMH");
-        library.add(book);
-        book = new Book("B4", "C++", "Herbert Schildt", "TMH");
-        library.add(book);
-        Display display = new Display(); //TODO:
-        display.welcomeMessage();
-        expectedPattern = "mm/dd/yyyy";
-        dateFormat = new SimpleDateFormat(expectedPattern);
-        String date = "14/07/2008";
 
-        inputDate =  dateFormat.parse(date);
-        movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
-        library.add(movie);
-
-        movie = new Movie("Mov2","Fast and Furious 7",inputDate,7,"James Wan");
-        library.add(movie);
-        movie = new Movie("Mov3","The Dark Knight Rises",inputDate,9,"Christopher Nolan");
-        library.add(movie);
+        /* Adding Books to the Library */
+        addBook();
 
 
+
+        /* Adding Movies to the Library */
+        addMovie();
+
+
+        /* Adding Users to the Library */
+        addUser();
+
+        Display.welcomeMessage();
         while (true){
-            display.printMenu();
+            Display.printMenu();
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter Your Choice");
             int choice;
 
             ListBooksCommand listbooks = new ListBooksCommand(library);
             GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
-            CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library);
+            CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library,manageUser);
             ExitCommand exit = new ExitCommand();
             ReturnBookCommand returnbook = new ReturnBookCommand(library);
             ListMoivesCommand listMoivesCommand = new ListMoivesCommand(library);
@@ -82,5 +75,39 @@ public class Main {
 
         }
 
+    }
+
+    private static void addUser() {
+        user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
+        manageUser.add(user);
+        user = new User("LIB-1002","Vinnet","Vinnet@gmail.com","7679406898","vinnet123");
+        manageUser.add(user);
+        user = new User("LIB-1003","chang","chang@gmail.com","7679406898","chang123");
+        manageUser.add(user);
+    }
+
+    private static void addMovie() throws ParseException {
+        expectedPattern = "mm/dd/yyyy";
+        dateFormat = new SimpleDateFormat(expectedPattern);
+        String date = "14/07/2008";
+
+        inputDate =  dateFormat.parse(date);
+        movie = new Movie("Mov1","The Dark Night",inputDate,8,"Christopher Nolan");
+        library.add(movie);
+
+        movie = new Movie("Mov2","Fast and Furious 7",inputDate,7,"James Wan");
+        library.add(movie);
+        movie = new Movie("Mov3","The Dark Knight Rises",inputDate,9,"Christopher Nolan");
+        library.add(movie);
+    }
+    private static void addBook(){
+        book = new Book("B1", "JAVA", "Herbert Schildt", "TMH");
+        library.add(book);
+        book = new Book("B2", "C", "Dennis Richie", "Sun");
+        library.add(book);
+        book = new Book("B3", "ORACLE", "Harish Gaur", "TMH");
+        library.add(book);
+        book = new Book("B4", "C++", "Herbert Schildt", "TMH");
+        library.add(book);
     }
 }

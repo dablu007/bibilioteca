@@ -3,9 +3,8 @@ package com.twu.biblioteca.controller;
 /**
  * Created by dabluk on 16/04/15.
  */
-import com.twu.biblioteca.command.ReturnBookCommand;
+import com.twu.biblioteca.command.LoginDetails;
 
-import java.beans.beancontext.BeanContextMembershipEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,34 +13,18 @@ import java.util.Map;
  * Created by dabluk on 14/04/15.
  */
 public class Library {
-
-    private ArrayList<Book> books;
-    private ArrayList<Movie> movies;
-    private ArrayList<UserDetail> userDetails ;
     private IssuedHistory issuedHistories;
-    private ReturnBookCommand returnBookCommand;
-    private BeanContextMembershipEvent moviesList;
-    private ArrayList<IRentableObject> irentableObjectList;
     private Map<RentableType,ArrayList<IRentableObject>> entityMap;
+    private LoginDetails loginDetail;
+    private ArrayList<LoginDetails> loginDetails;
+
+    private static IRentableObject emptyEntityResult = null;
+
     public Library(){
         issuedHistories = new IssuedHistory();
-        books = new ArrayList<Book>();
-        movies = new ArrayList<Movie>();
-        userDetails = new ArrayList<UserDetail>();
-        irentableObjectList = new ArrayList<IRentableObject>();
         entityMap = new HashMap<RentableType, ArrayList<IRentableObject>>();
+        loginDetails = new ArrayList<LoginDetails>();
     }
-
-
-
-    public void addUser(UserDetail user) {
-        userDetails.add(user);
-    }
-
-    public ArrayList<UserDetail> getUserDetails() {
-        return userDetails;
-    }
-
 
     public void add(IRentableObject libraryObject) {
         if (!entityMap.containsKey(libraryObject.getType())){
@@ -50,36 +33,29 @@ public class Library {
 
         ArrayList<IRentableObject> rentables = entityMap.get(libraryObject.getType());
         rentables.add(libraryObject);
+
     }
 
     public ArrayList<IRentableObject> getEntityList(RentableType rentableType) {
-        return entityMap.get(rentableType);
+        return new ArrayList<IRentableObject>(entityMap.get(rentableType));
     }
 
-    private RentableType checktype(IRentableObject rentableObject) {
-        return rentableObject.getType();
-    }
-
-//    public ArrayList<IRentableObject> getObjectList() {
-//        return irentableObjectList;
-//    }
 
     public IRentableObject checkoutEntity(IRentableObject rentableObject, String customerName){
         ArrayList<IRentableObject> rentableObjects = getEntityList(rentableObject.getType());
         for( IRentableObject object : rentableObjects ){
-            if( isSimilarObjects( object , rentableObject ) ){
+            if( object.equals(rentableObject ) && object.isAvailable() ){
+
                 IssueDetail issueDetail = new IssueDetail(customerName,object);
                 issuedHistories.addIssueDetail(issueDetail);
                 object.setAvailability(false);
                 return object;
             }
         }
-        return null;
+        return emptyEntityResult;
     }
 
-    private boolean isSimilarObjects(IRentableObject Firstobject, IRentableObject SecondObject) {
-        return (Firstobject.gethashcode() == SecondObject.gethashcode() && Firstobject.isAvailable()) ;
-    }
+
 
     public IssueDetail getIssueDetail(IRentableObject rentableObject) {
         return issuedHistories.getIssueDetail(rentableObject);
@@ -92,15 +68,22 @@ public class Library {
         return issueDetail.isForCustomer(customerName);
     }
 
-    public IRentableObject isObjectNull(String no,RentableType type) {
+    public IRentableObject getRentableObject(String id, RentableType type) {
         ArrayList<IRentableObject> entities = entityMap.get(type);
         for(IRentableObject object:entities){
-            if(object.getObjectNo().equals(no)){
+            if(object.getId().equals(id)){
                 return object;
             }
         }
-        return null;
+        return emptyEntityResult;
     }
+
+
+    public ArrayList<LoginDetails> getLoginDetails() {
+        return loginDetails;
+    }
+
+
 
 
 }
