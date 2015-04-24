@@ -22,8 +22,9 @@ public class Main {
     static SimpleDateFormat dateFormat;
     static Date inputDate;
     static Movie movie;
-    static User user;
+
     static UserManager userManager = new UserManager();
+    static User user = null;
 
     public static void main(String args[]) throws ParseException {
 
@@ -45,7 +46,7 @@ public class Main {
         GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
         CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library, userManager);
         ExitCommand exit = new ExitCommand();
-        ReturnBookCommand returnbook = new ReturnBookCommand(library);
+        ReturnBookCommand returnbook = new ReturnBookCommand(library, userManager);
         ListMoivesCommand listMoivesCommand = new ListMoivesCommand(library);
         CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(library,userManager);
 

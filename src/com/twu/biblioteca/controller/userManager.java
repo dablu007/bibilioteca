@@ -8,9 +8,11 @@ import java.util.ArrayList;
 public class UserManager {
 
     private ArrayList<User> users;
+
     private User emptyUser = null;
-    private boolean isLoggedIn = false;
-//    private ArrayList<User> cu
+
+    private User currentlyLoggedInUser = null;
+
     public UserManager() {
         users = new ArrayList<User>();
     }
@@ -20,13 +22,18 @@ public class UserManager {
     }
 
     public boolean isLoggedIn() {
-        return isLoggedIn;
+        return currentlyLoggedInUser != null;
     }
 
-    public User isValidUser(String libraryId, String password) {
+    public User getCurrentlyLoggedInUser()  {
+        return currentlyLoggedInUser;
+    }
+
+    public User login(String libraryId, String password) {
+
         for (User user : users) {
             if( user.getUserId().equals(libraryId) && user.getPassword().equals(password))  {
-                this.isLoggedIn = true;
+                this.currentlyLoggedInUser = user;
                 return user;
             }
         }

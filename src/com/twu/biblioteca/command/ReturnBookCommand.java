@@ -1,46 +1,39 @@
 package com.twu.biblioteca.command;
 
 import com.twu.biblioteca.controller.*;
-import com.twu.biblioteca.view.Display;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Created by dabluk on 20/04/15.
  */
 public class ReturnBookCommand implements ICommand {
     private Library library;
+    private UserManager userManager;
+    private Login login;
+    private UserLogin userLogin;
+    private PrintUserDetails printUserDetails;
 
-    public ReturnBookCommand(Library library) {
+    public ReturnBookCommand(Library library, UserManager userManager) {
         this.library  = library;
+        this.userManager = userManager;
+        login = new Login();
+        userLogin = new UserLogin();
+        printUserDetails = new PrintUserDetails();
+        returnEntity = new ReturnEntity();
     }
+
+    private ReturnEntity returnEntity;
 
     @Override
     public void execute()  {
-            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-            try {
-                Display.printToGetBook();
-                Display.getBookNo();
-                String bookno = (input.readLine());
-
-                Display.getCustomerName();
-                String name = input.readLine();
-                Book book = (Book)library.getRentableObject(bookno, RentableType.BOOK);
-                if (library.returnRentableObject(book,name)){
-                    book.setAvailability(true);
-                    Display.bookReturned();
-                }
-                else{
-                    Display.bookNotReturned();
-                }
-
+            User userLoggedIn = userLogin.getALoggedInUser(userManager, login);
+            if(userLoggedIn == null) {
+                return;
             }
-                catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            printUserDetails.printDetails(userLoggedIn);
+
+            returnEntity.returnEntity(userLoggedIn, library, RentableType.BOOK);
+
 
     }
 }

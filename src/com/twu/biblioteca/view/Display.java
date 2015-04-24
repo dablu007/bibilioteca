@@ -1,5 +1,7 @@
 package com.twu.biblioteca.view;
 
+import com.twu.biblioteca.controller.RentableType;
+
 /**
  * Created by dabluk on 16/04/15.
  */
@@ -67,21 +69,6 @@ public class Display {
             System.out.println(String.format("%s%17s%17s%27s","Book No.","BookName","Author","Publication"));
         }
 
-    public static void movieCheckedOut() {
-        System.out.println("Thank you! Enjoy the Movie");
-    }
-
-    public static void movieNotCheckedOut() {
-        System.out.println("This Movie is Not Available");
-    }
-
-    public static void getMovie() {
-        System.out.println("Enter the Movie Detail");
-    }
-
-    public static void getMovieNo() {
-        System.out.println("Enter the Movie Number");
-    }
 
     public static void getUserID() {
         System.out.println("Enter the User Library Number");
@@ -104,23 +91,51 @@ public class Display {
     }
 
     public static void enterLoginDetails() {
-        System.out.println("Enter Details to Login");
+        System.out.println("Enter Your Details to Login");
+        System.out.println();
     }
 
-    public static void getEntityDetails() {
-        System.out.println("Enter the Details for Rentable Entity You Want to Checkout");
+    public static void enterDetailsOfEntity(RentableType type) {
+        if (type == RentableType.BOOK)
+            System.out.println("Enter the Details of Book for Checkout");
+        else
+            System.out.println("Enter the Details of Movie for Checkout");
+
     }
 
-    public static void getEntityNo() {
-        System.out.println("Enter the Rentable Entity Number");
+    public static void EnterIdOfEntity(RentableType type) {
+        if (type == RentableType.BOOK)
+            System.out.println("Enter the Book Number");
+        else
+            System.out.println("Enter the Movie Number");
     }
 
-    public static void entityNotCheckedOut() {
-        System.out.println("This Entity is Not Avilable");
+    public static void cannotFindEntityMessage(RentableType type) {
+        if (type == RentableType.BOOK)
+            System.out.println("This Book is Not Avilable");
+        else
+            System.out.println("This Movie is Not Avilable");
     }
 
-    public static void entityCheckedOut() {
-        System.out.println("Thank You! Enjoy Your Stuff");
+    public static void successfullyCheckedOutEntity(RentableType type) {
+        if (type == RentableType.BOOK)
+            System.out.println("Thank You! Enjoy Your Book");
+        else
+            System.out.println("Thank You! Enjoy Your Movie");
+    }
+
+    public static void successfullyReturnedEntity(RentableType type) {
+        if (type == RentableType.BOOK)
+            System.out.println("Thank You For Returning the Book");
+        else
+            System.out.println("Thank You for Returning the Movie");
+    }
+
+    public static void unsuccessfullEntityToReturn(RentableType type) {
+        if (type == RentableType.BOOK)
+            System.out.println("This is not a valid Book to Return");
+        else
+            System.out.println("This is not a valid Movie to Return");
     }
 }
 

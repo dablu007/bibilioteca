@@ -13,9 +13,6 @@ import java.io.InputStreamReader;
 public class PrintUserDetails {
     public void printDetails(User user){
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-        // TODO : probably a very confusing user flow
-
         Display.printUserOption();
         try {
             String option = input.readLine();
@@ -23,7 +20,7 @@ public class PrintUserDetails {
                 return;
             }
 
-            System.out.print(user);
+            System.out.println(user);
         }
         catch (IOException e) {
             e.printStackTrace();

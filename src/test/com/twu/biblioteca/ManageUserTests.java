@@ -32,7 +32,7 @@ public class ManageUserTests {
         userManager.add(user1);
         userManager.add(user2);
 
-        assertEquals(user1, userManager.isValidUser("LIB-1002", "dablu098"));
+        assertEquals(user1, userManager.login("LIB-1002", "dablu098"));
     }
 
     @Test
@@ -40,16 +40,16 @@ public class ManageUserTests {
         User user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
         userManager.add(user);
 
-        assertEquals(user, userManager.isValidUser("LIB-1001", "dablu123"));
+        assertEquals(user, userManager.login("LIB-1001", "dablu123"));
     }
     @Test
     public void shouldCheckforAUserLoggedInOrNot(){
-        User user = userManager.isValidUser("LIB-1001","dablu123");
+        User user = userManager.login("LIB-1001", "dablu123");
         assertTrue(userManager.isLoggedIn());
     }
     @Test
     public void ShouldPrintUserDetailsWhichIsLoggedIn(){
-        User user1 = userManager.isValidUser("LIB-1001","dablu123");
+        User user1 = userManager.login("LIB-1001", "dablu123");
         assertEquals(user, user1);
     }
 }

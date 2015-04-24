@@ -15,30 +15,32 @@ import java.io.InputStreamReader;
  */
 public class CheckOut {
 
-    public void checkoutEntity(User user, Library library,RentableType type) {
+    public void checkoutEntity(User user, Library library, RentableType type) {
+
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        Display.getEntityDetails();
-        Display.getEntityNo();
-        String entityNo = null;
+        Display.enterDetailsOfEntity(type);
+
         try {
-            entityNo = (input.readLine());
+            Display.EnterIdOfEntity(type);
+            String entityNo = (input.readLine());
+
             IRentableObject entity = library.getRentableObject(entityNo, type);
 
             if (entity == null) {
-                Display.entityNotCheckedOut();
+                Display.cannotFindEntityMessage(type);
                 return;
 
             }
+
             IRentableObject checkedoutEntity = library.checkout(entity, user.getUserName());
-            if (checkedoutEntity != null) {
-                Display.entityCheckedOut();
+            if (checkedoutEntity == null) {
+                Display.cannotFindEntityMessage(type);
                 return;
             }
-            else {
-                Display.entityNotCheckedOut();
-                return;
-            }
+
+            Display.successfullyCheckedOutEntity(type);
         }
+
         catch (IOException e) {
             e.printStackTrace();
         }
