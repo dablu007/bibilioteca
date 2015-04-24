@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class ManageUser {
 
     private ArrayList<User> users;
-
+    private User emptyUser = null;
+    private boolean isLoggedIn = false;
+//    private ArrayList<User> cu
     public ManageUser() {
         users = new ArrayList<User>();
     }
@@ -17,17 +19,19 @@ public class ManageUser {
         users.add(user);
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
-    public boolean isValidUser(String libraryId, String password) {
+    public User isValidUser(String libraryId, String password) {
         for (User user : users) {
             if( user.getUserId().equals(libraryId) && user.getPassword().equals(password))  {
-                return true;
+                this.isLoggedIn = true;
+                return user;
             }
         }
-        return false;
+
+        return emptyUser;
     }
 
 

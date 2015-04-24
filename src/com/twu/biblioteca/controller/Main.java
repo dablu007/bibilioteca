@@ -40,28 +40,32 @@ public class Main {
         addUser();
 
         Display.welcomeMessage();
+
+        ListBooksCommand listbooks = new ListBooksCommand(library);
+        GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
+        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library, manageUser);
+        ExitCommand exit = new ExitCommand();
+        ReturnBookCommand returnbook = new ReturnBookCommand(library);
+        ListMoivesCommand listMoivesCommand = new ListMoivesCommand(library);
+        CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(library);
+
+        Menu options = new Menu();
+
+        options.addCommand(1, listbooks);
+        options.addCommand(2, getbookdetail);
+        options.addCommand(3, checkoutBook);
+        options.addCommand(4, returnbook);
+        options.addCommand(5, listMoivesCommand);
+        options.addCommand(6, checkoutMovieCommand);
+        options.addCommand(7,exit);
+
+
         while (true){
             Display.printMenu();
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter Your Choice");
             int choice;
 
-            ListBooksCommand listbooks = new ListBooksCommand(library);
-            GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
-            CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library,manageUser);
-            ExitCommand exit = new ExitCommand();
-            ReturnBookCommand returnbook = new ReturnBookCommand(library);
-            ListMoivesCommand listMoivesCommand = new ListMoivesCommand(library);
-            CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(library);
-            Menu options = new Menu();
-
-            options.addCommand(1, listbooks);
-            options.addCommand(2, getbookdetail);
-            options.addCommand(3, checkoutBook);
-            options.addCommand(4, returnbook);
-            options.addCommand(5,listMoivesCommand);
-            options.addCommand(6,checkoutMovieCommand);
-            options.addCommand(7,exit);
 
             try {
                 choice = Integer.parseInt(input.readLine());

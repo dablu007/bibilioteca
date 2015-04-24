@@ -3,6 +3,7 @@ package test.com.twu.biblioteca;
 import com.twu.biblioteca.controller.Library;
 import com.twu.biblioteca.controller.ManageUser;
 import com.twu.biblioteca.controller.User;
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,18 +19,14 @@ import static org.junit.Assert.assertTrue;
 public class ManageUserTests {
 
     private ManageUser manageUser;
-    private static User emptyUser = null;
-
+    private User user;
     @Before
     public void setup(){
         manageUser = new ManageUser();
-    }
-    @Test
-    public void ShouldAddAUser(){
-        User user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
+        user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
         manageUser.add(user);
-        assertEquals(1,manageUser.getUsers().size());
     }
+
 
     @Test
     public void ShouldCheckForAValidUser(){
@@ -39,7 +36,7 @@ public class ManageUserTests {
         manageUser.add(user1);
         manageUser.add(user2);
 
-        assertTrue(manageUser.isValidUser("LIB-1002", "dablu098"));
+        assertEquals(user1, manageUser.isValidUser("LIB-1002", "dablu098"));
     }
 
     @Test
@@ -47,7 +44,16 @@ public class ManageUserTests {
         User user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
         manageUser.add(user);
 
-        assertFalse(manageUser.isValidUser("LIB-1001", "dablu123"));
+        assertEquals(user,manageUser.isValidUser("LIB-1001", "dablu123"));
     }
-
+    @Test
+    public void shouldCheckforAUserLoggedInOrNot(){
+        User user = manageUser.isValidUser("LIB-1001","dablu123");
+        assertTrue(manageUser.isLoggedIn());
+    }
+    @Test
+    public void ShouldPrintUserDetailsWhichIsLoggedIn(){
+        User user1 = manageUser.isValidUser("LIB-1001","dablu123");
+        assertEquals(user,user1);
+    }
 }

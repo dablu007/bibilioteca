@@ -30,11 +30,12 @@ public class CheckoutMovieCommand implements ICommand {
             Movie movie = (Movie)library.getRentableObject(movieno, RentableType.MOVIE);
             Display.printToGetCustomerName();
             String name = input.readLine();
-            if ( movie == null){
+
+            if (movie == null){
                 Display.printMovieNotCheckedOut();
             }
             else {
-                Movie checkedoutMovie = (Movie) library.checkoutEntity(movie, name);
+                Movie checkedoutMovie = (Movie) library.checkout(movie, name);
 
                 if (checkedoutMovie != null) {
                     Display.printMovieCheckedOut();

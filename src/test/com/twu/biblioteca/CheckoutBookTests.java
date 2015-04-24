@@ -28,7 +28,7 @@ public class CheckoutBookTests {
         Book book = new Book("B1001", "The Diary of a Young Girl", "Anne Frank", "OttoFrank");
         library.add(book);
 
-        Book checkedOutBook = (Book)library.checkoutEntity(book, "Some User");
+        Book checkedOutBook = (Book)library.checkout(book, "Some User");
 
         assertEquals(book, checkedOutBook);
 

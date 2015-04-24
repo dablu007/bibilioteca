@@ -98,5 +98,13 @@ public class Display {
     public static void printBook() {
         System.out.println(String.format("%s%17s%17s%27s","Book No.","BookName","Author","Publication"));
     }
+
+    public static void printUserOption() {
+        System.out.println("Want to see Your Details Press Y to See N to Exit");
+    }
+
+    public static void printLogin() {
+        System.out.println("Enter Details to Login");
+    }
 }
 

@@ -41,11 +41,11 @@ public class Library {
     }
 
 
-    public IRentableObject checkoutEntity(IRentableObject rentableObject, String customerName){
+    public IRentableObject checkout(IRentableObject rentableObject, String customerName){
         ArrayList<IRentableObject> rentableObjects = getEntityList(rentableObject.getType());
+
         for( IRentableObject object : rentableObjects ){
             if( object.equals(rentableObject ) && object.isAvailable() ){
-
                 IssueDetail issueDetail = new IssueDetail(customerName,object);
                 issuedHistories.addIssueDetail(issueDetail);
                 object.setAvailability(false);
@@ -70,6 +70,7 @@ public class Library {
 
     public IRentableObject getRentableObject(String id, RentableType type) {
         ArrayList<IRentableObject> entities = entityMap.get(type);
+
         for(IRentableObject object:entities){
             if(object.getId().equals(id)){
                 return object;
