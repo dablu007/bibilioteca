@@ -44,7 +44,7 @@ public class LibraryTests {
     public void ShouldCheckForAAddedMovie(){
         assertEquals(movie,library.getEntityList(RentableType.MOVIE).get(0));
     }
-    /* Diffrent Test Cases for Checkout from the library */
+    /* Diffrent Test Cases for CheckOut from the library */
 
 
     @Test

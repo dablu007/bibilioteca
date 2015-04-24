@@ -14,98 +14,112 @@ import java.io.InputStreamReader;
 public class CheckoutBookCommand implements ICommand {
     private Library library;
     private Book book;
-    private ManageUser manageUser;
+    private UserManager userManager;
     private Login login;
-    private User user = null;
     private boolean exitCheckout = false;
+    private UserLogging userLogging;
+    private User user = null;
+    private PrintUserDetails printUserDetails;
+    private CheckOut checkout;
 
-    public CheckoutBookCommand(Library library, ManageUser manageUser) {
+    public CheckoutBookCommand(Library library, UserManager userManager) {
         this.library = library;
-        this.manageUser =manageUser;
+        this.userManager = userManager;
         login = new Login();
+        userLogging = new UserLogging();
+        printUserDetails = new PrintUserDetails();
+        checkout = new CheckOut();
     }
 
     @Override
     public void execute() {
-        boolean isLoggedIn = checklogin();
-
-        if (!isLoggedIn)    {
+//        boolean isLoggedIn = checkAndDoLogin();
+//
+//        if (!isLoggedIn)    {
+//            return;
+//        }
+//        printUserDetails(user);
+//        checkoutBook(user);
+        User userLoggedIn = userLogging.checkLoginAndReturnUser(userManager, login, user);
+        if (userLoggedIn == null)
             return;
-        }
-        printUserDetails(user);
-        checkoutBook(user);
-    }
-
-    private boolean checklogin() {
-        if (manageUser.isLoggedIn()) {
-            return true;
-        }
-
-        Display.printLogin();
-
-        login.enterDetails();
-        String libraryNo = login.getUserId();
-        String password = login.getPassword();
-
-        this.user = manageUser.isValidUser(libraryNo, password);
-
-        if (user == null) {
-            Display.printInvalidPassword();
-            return false;
-        }
-
-        return true;
-    }
-
-    private void printUserDetails(User user) {
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-        // TODO : probably a very confusing user flow
-
-        Display.printUserOption();
-        try {
-            String option = input.readLine();
-            if (option.equals("N")){
-                return;
-            }
-
-            System.out.print(user);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void checkoutBook(User user) {
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        Display.printToGetBook();
-        Display.printToGetBookNo();
-        String bookno = null;
-        try {
-            bookno = (input.readLine());
-            IRentableObject book = library.getRentableObject(bookno, RentableType.BOOK);
-
-            if (book == null) {
-                Display.printBookNotCheckedOut();
-                return;
-
-            }
-
-            //TODO for changing username to user object
-            IRentableObject checkedoutBook = library.checkout(book, user.getUserName());
-            if (checkedoutBook != null) {
-                    Display.printBookCheckedOut();
-                    return;
-            }
-            else {
-                    Display.printBookNotCheckedOut();
-                    return;
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        printUserDetails.printDetails(userLoggedIn);
+        checkout.checkoutEntity(userLoggedIn, library, RentableType.BOOK);
 
 
     }
 }
+
+//    private boolean checkAndDoLogin() {
+//        if (userManager.isLoggedIn()) {
+//            return true;
+//        }
+//
+//        Display.enterLoginDetails();
+//
+//        login.enterDetails();
+//        String libraryNo = login.getUserId();
+//        String password = login.getPassword();
+//
+//        this.user = userManager.isValidUser(libraryNo, password);
+//
+//        if (user == null) {
+//            Display.invalidPassword();
+//            return false;
+//        }
+//
+//        return true;
+//    }
+//
+//    private void printUserDetails(User user) {
+//        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+//
+//        // TODO : probably a very confusing user flow
+//
+//        Display.printUserOption();
+//        try {
+//            String option = input.readLine();
+//            if (option.equals("N")){
+//                return;
+//            }
+//
+//            System.out.print(user);
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void checkoutBook(User user) {
+//        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+//        Display.printToGetBook();
+//        Display.getBookNo();
+//        String bookno = null;
+//        try {
+//            bookno = (input.readLine());
+//            IRentableObject book = library.getRentableObject(bookno, RentableType.BOOK);
+//
+//            if (book == null) {
+//                Display.bookNotCheckedOut();
+//                return;
+//
+//            }
+//
+//            //TODO for changing username to user object
+//            IRentableObject checkedoutBook = library.checkout(book, user.getUserName());
+//            if (checkedoutBook != null) {
+//                    Display.bookCheckedOut();
+//                    return;
+//            }
+//            else {
+//                    Display.bookNotCheckedOut();
+//                    return;
+//            }
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
+//}

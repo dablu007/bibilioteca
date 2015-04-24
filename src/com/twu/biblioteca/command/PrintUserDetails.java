@@ -1,5 +1,6 @@
 package com.twu.biblioteca.command;
 
+import com.twu.biblioteca.controller.User;
 import com.twu.biblioteca.view.Display;
 
 import java.io.BufferedReader;
@@ -9,29 +10,23 @@ import java.io.InputStreamReader;
 /**
  * Created by dabluk on 24/04/15.
  */
-public class Login {
-    private String userId;
-    private String password;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void enterDetails(){
+public class PrintUserDetails {
+    public void printDetails(User user){
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
+        // TODO : probably a very confusing user flow
+
+        Display.printUserOption();
         try {
-            Display.getUserID();
-            this.userId = input.readLine();
-            Display.getPassword();
-            this.password = input.readLine();
+            String option = input.readLine();
+            if (option.equals("N")){
+                return;
+            }
+
+            System.out.print(user);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

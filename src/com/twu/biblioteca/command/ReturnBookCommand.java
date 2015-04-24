@@ -23,18 +23,18 @@ public class ReturnBookCommand implements ICommand {
 
             try {
                 Display.printToGetBook();
-                Display.printToGetBookNo();
+                Display.getBookNo();
                 String bookno = (input.readLine());
 
-                Display.printToGetCustomerName();
+                Display.getCustomerName();
                 String name = input.readLine();
                 Book book = (Book)library.getRentableObject(bookno, RentableType.BOOK);
                 if (library.returnRentableObject(book,name)){
                     book.setAvailability(true);
-                    Display.printBookReturned();
+                    Display.bookReturned();
                 }
                 else{
-                    Display.printBookNotReturned();
+                    Display.bookNotReturned();
                 }
 
             }

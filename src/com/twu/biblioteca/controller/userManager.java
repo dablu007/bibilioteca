@@ -5,13 +5,13 @@ import java.util.ArrayList;
 /**
  * Created by dabluk on 23/04/15.
  */
-public class ManageUser {
+public class UserManager {
 
     private ArrayList<User> users;
     private User emptyUser = null;
     private boolean isLoggedIn = false;
 //    private ArrayList<User> cu
-    public ManageUser() {
+    public UserManager() {
         users = new ArrayList<User>();
     }
 

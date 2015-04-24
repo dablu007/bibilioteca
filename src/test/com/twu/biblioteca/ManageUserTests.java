@@ -1,13 +1,9 @@
 package test.com.twu.biblioteca;
 
-import com.twu.biblioteca.controller.Library;
-import com.twu.biblioteca.controller.ManageUser;
+import com.twu.biblioteca.controller.UserManager;
 import com.twu.biblioteca.controller.User;
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -18,13 +14,13 @@ import static org.junit.Assert.assertTrue;
  */
 public class ManageUserTests {
 
-    private ManageUser manageUser;
+    private UserManager userManager;
     private User user;
     @Before
     public void setup(){
-        manageUser = new ManageUser();
+        userManager = new UserManager();
         user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
-        manageUser.add(user);
+        userManager.add(user);
     }
 
 
@@ -33,27 +29,27 @@ public class ManageUserTests {
         User user1 = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
         User user2 = new User("LIB-1002","Dablu 2","dablu2@gmail.com","7679403898","dablu098");
 
-        manageUser.add(user1);
-        manageUser.add(user2);
+        userManager.add(user1);
+        userManager.add(user2);
 
-        assertEquals(user1, manageUser.isValidUser("LIB-1002", "dablu098"));
+        assertEquals(user1, userManager.isValidUser("LIB-1002", "dablu098"));
     }
 
     @Test
     public void ShouldCheckForAInvalidValidUser(){
         User user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
-        manageUser.add(user);
+        userManager.add(user);
 
-        assertEquals(user,manageUser.isValidUser("LIB-1001", "dablu123"));
+        assertEquals(user, userManager.isValidUser("LIB-1001", "dablu123"));
     }
     @Test
     public void shouldCheckforAUserLoggedInOrNot(){
-        User user = manageUser.isValidUser("LIB-1001","dablu123");
-        assertTrue(manageUser.isLoggedIn());
+        User user = userManager.isValidUser("LIB-1001","dablu123");
+        assertTrue(userManager.isLoggedIn());
     }
     @Test
     public void ShouldPrintUserDetailsWhichIsLoggedIn(){
-        User user1 = manageUser.isValidUser("LIB-1001","dablu123");
-        assertEquals(user,user1);
+        User user1 = userManager.isValidUser("LIB-1001","dablu123");
+        assertEquals(user, user1);
     }
 }

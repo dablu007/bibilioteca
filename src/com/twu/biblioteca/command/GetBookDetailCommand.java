@@ -28,7 +28,7 @@ public class GetBookDetailCommand implements ICommand {
             }
         }
         try {
-            Display.printToGetBookNo();
+            Display.getBookNo();
             String bookno = (input.readLine());
             Display.printBook();
             for (int i = 0; i < books.size(); i++) {

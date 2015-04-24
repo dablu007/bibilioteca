@@ -1,49 +1,35 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.controller.ICommand;
-import com.twu.biblioteca.controller.Library;
-import com.twu.biblioteca.controller.Movie;
-import com.twu.biblioteca.controller.RentableType;
-import com.twu.biblioteca.view.Display;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.twu.biblioteca.controller.*;
 
 /**
  * Created by dabluk on 22/04/15.
  */
 public class CheckoutMovieCommand implements ICommand {
     private Library library;
-
-    public CheckoutMovieCommand(Library library) {
+    private UserManager userManager;
+    private Login login;
+    private UserLogging userLogging;
+    private User user = null;
+    private PrintUserDetails printUserDetails;
+    private CheckOut checkout;
+    public CheckoutMovieCommand(Library library,UserManager userManager) {
         this.library = library;
+        this.userManager = userManager;
+        login = new Login();
+        userLogging = new UserLogging();
+        printUserDetails = new PrintUserDetails();
+        checkout = new CheckOut();
     }
 
     @Override
     public void execute() {
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            Display.printToGetMovie();
-            Display.printToGetMovieNo();
-            String movieno = (input.readLine());
-            Movie movie = (Movie)library.getRentableObject(movieno, RentableType.MOVIE);
-            Display.printToGetCustomerName();
-            String name = input.readLine();
+        User userLoggedIn = userLogging.checkLoginAndReturnUser(userManager, login, user);
+        if(userLoggedIn == null)
+            return;
+        printUserDetails.printDetails(userLoggedIn);
+        checkout.checkoutEntity(userLoggedIn,library,RentableType.MOVIE);
 
-            if (movie == null){
-                Display.printMovieNotCheckedOut();
-            }
-            else {
-                Movie checkedoutMovie = (Movie) library.checkout(movie, name);
 
-                if (checkedoutMovie != null) {
-                    Display.printMovieCheckedOut();
-                } else
-                    Display.printMovieNotCheckedOut();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

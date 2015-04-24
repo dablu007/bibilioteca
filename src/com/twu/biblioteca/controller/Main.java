@@ -23,7 +23,7 @@ public class Main {
     static Date inputDate;
     static Movie movie;
     static User user;
-    static ManageUser manageUser = new ManageUser();
+    static UserManager userManager = new UserManager();
 
     public static void main(String args[]) throws ParseException {
 
@@ -43,11 +43,11 @@ public class Main {
 
         ListBooksCommand listbooks = new ListBooksCommand(library);
         GetBookDetailCommand getbookdetail = new GetBookDetailCommand(library);
-        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library, manageUser);
+        CheckoutBookCommand checkoutBook = new CheckoutBookCommand(library, userManager);
         ExitCommand exit = new ExitCommand();
         ReturnBookCommand returnbook = new ReturnBookCommand(library);
         ListMoivesCommand listMoivesCommand = new ListMoivesCommand(library);
-        CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(library);
+        CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(library,userManager);
 
         Menu options = new Menu();
 
@@ -83,11 +83,11 @@ public class Main {
 
     private static void addUser() {
         user = new User("LIB-1001","Dablu","dablu@gmail.com","7679406898","dablu123");
-        manageUser.add(user);
+        userManager.add(user);
         user = new User("LIB-1002","Vinnet","Vinnet@gmail.com","7679406898","vinnet123");
-        manageUser.add(user);
+        userManager.add(user);
         user = new User("LIB-1003","chang","chang@gmail.com","7679406898","chang123");
-        manageUser.add(user);
+        userManager.add(user);
     }
 
     private static void addMovie() throws ParseException {

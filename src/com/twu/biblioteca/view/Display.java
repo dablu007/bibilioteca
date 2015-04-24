@@ -19,7 +19,7 @@ public class Display {
             System.out.println("3.Book CheckOut");
             System.out.println("4.Return Book");
             System.out.println("5.List Movies");
-            System.out.println("6.Movie Checkout");
+            System.out.println("6.Movie CheckOut");
             System.out.println("7.Exit");
         }
 
@@ -29,28 +29,28 @@ public class Display {
         public static void printToGetBook(){
             System.out.println("Enter the Book Details");
         }
-        public static void printToGetCustomerName(){
+        public static void getCustomerName(){
             System.out.println("Enter the Customer Name");
         }
-        public static void printBookReturned(){
+        public static void bookReturned(){
             System.out.println("Thank you For Returning the Book");
         }
-        public static void printBookNotReturned(){
+        public static void bookNotReturned(){
             System.out.println("This is Not a Valid Book to Return");
         }
 
-        public static void printBookCheckedOut(){
+        public static void bookCheckedOut(){
             System.out.println("Thank you! Enjoy the book");
         }
-        public static void printBookNotCheckedOut(){
+        public static void bookNotCheckedOut(){
             System.out.println("That Book is Not Avilable");
         }
 
-        public static void printExit() {
+        public static void exit() {
             System.out.println("Have A Nice Day..");
         }
 
-        public static void printToGetBookNo() {
+        public static void getBookNo() {
             System.out.println("Enter the Book No.");
         }
         public static void printMovieList(){
@@ -67,31 +67,31 @@ public class Display {
             System.out.println(String.format("%s%17s%17s%27s","Book No.","BookName","Author","Publication"));
         }
 
-    public static void printMovieCheckedOut() {
+    public static void movieCheckedOut() {
         System.out.println("Thank you! Enjoy the Movie");
     }
 
-    public static void printMovieNotCheckedOut() {
+    public static void movieNotCheckedOut() {
         System.out.println("This Movie is Not Available");
     }
 
-    public static void printToGetMovie() {
+    public static void getMovie() {
         System.out.println("Enter the Movie Detail");
     }
 
-    public static void printToGetMovieNo() {
+    public static void getMovieNo() {
         System.out.println("Enter the Movie Number");
     }
 
-    public static void printTogetUserID() {
+    public static void getUserID() {
         System.out.println("Enter the User Library Number");
     }
 
-    public static void printTogetPassword() {
+    public static void getPassword() {
         System.out.println("Enter the Password");
     }
 
-    public static void printInvalidPassword() {
+    public static void invalidPassword() {
         System.out.println("Invalid Credentials given please give the Correct One.");
     }
 
@@ -103,8 +103,24 @@ public class Display {
         System.out.println("Want to see Your Details Press Y to See N to Exit");
     }
 
-    public static void printLogin() {
+    public static void enterLoginDetails() {
         System.out.println("Enter Details to Login");
+    }
+
+    public static void getEntityDetails() {
+        System.out.println("Enter the Details for Rentable Entity You Want to Checkout");
+    }
+
+    public static void getEntityNo() {
+        System.out.println("Enter the Rentable Entity Number");
+    }
+
+    public static void entityNotCheckedOut() {
+        System.out.println("This Entity is Not Avilable");
+    }
+
+    public static void entityCheckedOut() {
+        System.out.println("Thank You! Enjoy Your Stuff");
     }
 }
 

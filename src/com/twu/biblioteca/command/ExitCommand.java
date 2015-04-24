@@ -9,7 +9,7 @@ import com.twu.biblioteca.view.Display;
 public class ExitCommand implements ICommand {
     @Override
     public void execute() {
-        Display.printExit();
+        Display.exit();
         System.exit(0);
     }
 }
