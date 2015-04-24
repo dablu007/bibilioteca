@@ -32,12 +32,7 @@ public class CheckoutBookCommand implements ICommand {
         if (!isLoggedIn)    {
             return;
         }
-
         printUserDetails(user);
-
-        if (exitCheckout)
-            return;
-
         checkoutBook(user);
     }
 
@@ -71,7 +66,6 @@ public class CheckoutBookCommand implements ICommand {
         try {
             String option = input.readLine();
             if (option.equals("N")){
-                exitCheckout = true;
                 return;
             }
 
